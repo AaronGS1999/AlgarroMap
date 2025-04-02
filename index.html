@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mapa Interactivo con JSON</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        #mapid {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div id="mapid"></div>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script>
+        function cargarJSON(url, callback) {
+            fetch(url)
+                .then(response => response.json())
+                .then(data => callback(data))
+                .catch(error => console.error('Error cargando JSON:', error));
+        }
+
+        var mymap = L.map('mapid').setView([36.93, -1.99], 13);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
+            maxZoom: 18
+        }).addTo(mymap);
+
+        function getColor(sexo) {
+            if (sexo.toLowerCase() === 'macho') return 'blue';
+            if (sexo.toLowerCase() === 'hembra') return 'red';
+            return 'gray';
+        }
+
+        cargarJSON('datos.json', function(puntos) {
+            puntos.forEach(punto => {
+                let popupContent = `<b>${punto.Nombre}</b><br>
+                    Sexo: ${punto.Sexo}<br>
+                    Injerto: ${punto["Injerto (Pie)"]}<br>
+                    Cultivado: ${punto["Silvestre/Cultivado"]}<br>
+                    Fecha de recolección: ${punto["Fecha recolección"]}<br>
+                    Observaciones: ${punto.Observaciones || 'Ninguna'}<br>
+                    <img src='imagenes/${punto.imagen}' width='150px'>`;
+                
+                let marker = L.circleMarker([punto.latitud / 1000000, punto.longitud / 1000000], {
+                    color: getColor(punto.Sexo),
+                    radius: 8,
+                    fillOpacity: 0.7
+                }).addTo(mymap);
+                
+                marker.bindPopup(popupContent);
+            });
+        });
+    </script>
+</body>
+</html>

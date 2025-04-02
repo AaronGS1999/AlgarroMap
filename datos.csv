@@ -1,0 +1,65 @@
+﻿id;latitud;longitud;Nombre;Sexo;Injerto (Pie);Silvestre/Cultivado;Caracterización fruto;Semillas para banco;Riego ;Ubicación ;Fecha recolección ;Observaciones;imagen
+1;36931114;-1990828;Plomo 1;Macho;No;Cultivado;_;_;Si;36.931114, -1.990828;45566;;id1.jpg
+2;36930463;-1991669;Plomo 2;Macho;no;Cultivado;_;_;Si;36.930463, -1.991669;45566;;id1.jpg
+3;36930819;-1989421;Plomo 3;Hembra;¿?;Cultivado;Si;Si;Si;36.930819, -1.989421;45566;;id1.jpg
+4;37161924;-2076352;Pileta 1;Hembra/Hemafodita;¿?;Actualmente no;¿?;¿?;No;37.161924, -2.076352;45566;No tiene flores;id1.jpg
+5;37161635;-2074518;Pileta 2;Hembra/Hemafodita;¿?;Actualmente no;Si;Si;No;37.161635, -2.074518 ;45566;No tiene flores;id1.jpg
+6;36858250;-2481333;Belén 1;Hembra;¿?;Actualmente no;No;No;No;"36°51'29.7""N 2°28'52.8""W";45582;Muy poco frutos, cosechado;id1.jpg
+7;36858083;-2480861;Belén 2;Macho;No;Actualmente no;_;_;No;"36°51'29.1""N 2°28'51.1""W";45582;;id1.jpg
+8;37011917;-2756583;El de Cristóbal;Hembra;Si (macho);Actualmente no;Si;Si;Boca cerca;"37°00'42.9""N 2°45'23.7""W";45582;Le atribuyen 800 años;id1.jpg
+9;37016746;-2749151;El de Rafael;Hembra;¿?;Actualmente no;Si;Si;No;37.016746,  -2.749151;45582;;id1.jpg
+10;37106139;-2042500;Marchalico 1 ;Hembra;Si (macho);Actualmente no;No;No;No;"37°06'22.1""N 2°02'33.0""W";45582;;id1.jpg
+11;37105820;-2043416;Marchalico 1 ;Macho;Si (macho);Actualmente no;_;_;No;"37°06'22.1""N 2°02'33.0""W";45582;;id1.jpg
+12;37105732;-2043455;Marchalico 2;Hembra;¿?;Actualmente no;Si;Si;No;37.105820, -2.043416;45582;;id1.jpg
+13;37150773;-2084554;Marchalico 3;Hembra;¿?;Actualmente no;Si;Si;No;37.105732, -2.043455;45582;;id1.jpg
+14;37151130;-2085525;Los Mañas 1;Hembra;Si (macho);Actualmente no;Si;Si;No;37.150773, -2.084554 ;45582;;id1.jpg
+15;37038879;-2200092;Los Mañas 1;Macho;Si (macho);Actualmente no;_;_;No;37.150773, -2.084554 ;45582;;id1.jpg
+16;37036750;-2194500;Los Mañas 2;Hembra;Si (macho);Actualmente no;Si;Si;No;37.151130, -2.085525;45582;;id1.jpg
+17;37036930;-2194390;Los Mañas 2;Macho;Si (macho);Actualmente no;_;_;No;37.151130, -2.085525;45582;;id1.jpg
+18;37072297;-1861735;Lucainena 1;Hembra;No;Silvestre;Si;Si;No;37.038763, -2.200419;45589;Parece más joven, totalmente salvaje;id1.jpg
+19;37072006;-1863101;Lucainena 2;Hembra;¿?;Actualmente no;Si;SI;No;37.038879, -2.200092 ;45589;;id1.jpg
+20;37071220;-1861675;Lucainena 3;Macho;No;Actualmente no;_;_;No;"37°02'12.3""N 2°11'40.2""W";45589;;id1.jpg
+21;37070655;-1865163;Lucainena 4;Hembra;¿? (hembra);Actualmente no;Si;Si;No;37.036930, -2.194390 ;45589;;id1.jpg
+22;37071429;-1866478;Enmedio 1 ;Macho;No;Actualmente no;_;_;no;37.072297, -1.861735 ;45589;;id1.jpg
+23;37072025;-1866940;Enmedio 2;Hembra;¿? (hembra);Actualmente no;Si;Si;No;37.072006, -1.863101 ;45589;Variedad: De Bédar ;id1.jpg
+24;37073493;-1860221;Enmedio 3;Hembra;¿?;Actualmente no;Si;Si;No;37.071220, -1.861675;45589;Un paisano del pueblo no tiene claro si no tiene dos injertos ;id1.jpg
+25;36819944;-2652833;Enmedio 4 ;Hembra;Si (macho);Actualmente no;Si;Si;No;37.070655, -1.865163.;45589;Variedad: De Bédar ;id1.jpg
+26;36821936;-2653143;Enmedio 5;Hembra;Si (¿?);Actualmente no;Si;Si;No;37.071429, -1.866478 ;45589;Variedad: Valenciana;id1.jpg
+27;36849833;-2042278;En medio 6;Hembra;¿? (hembra);Actualmente no;Si;Si;No;37.072025, -1.866940 ;45589;Ejemplar abierto en muchas ramas. Variedad Negra.;id1.jpg
+28;36849626;-2042106;MacenasGolf;Hembra;Parece;Actualmente no;Si;Si;No;37.073493, -1.860221 ;45589;;id1.jpg
+29;36849389;-2041056;Vicar 1;Hembra;Si (macho);Cultivado;Si;Si;Si;"36°49'11.8""N 2°39'10.2""W ";45596;;id1.jpg
+30;36849528;-2041833;Vicar 1;Macho;Si (macho);Cultivado;_;_;Si;"36°49'11.8""N 2°39'10.2""W ";45596;;id1.jpg
+31;36848730;-2043119;Vicar 2;Hembra;¿?;Cultivado;Si;Si;SI;36.821936, -2.653143 ;45596;;id1.jpg
+32;36842100;-2048049;Botánico 1;Hemafrodita;Segurante (¿?);Cultivado;Si;Si;Si;"36°50'59.4""N 2°02'32.2""W ";45596;;id1.jpg
+33;36848475;-2031420;Botánico 2;Hemafrodita;Segurante (¿?);Cultivado;Si;Si;Si;36.849626, -2.042106 ;45596;;id1.jpg
+34;36883749;-2003916;Botánico 3;Macho;No;Cultivado;_;_;Si;"36°50'57.8""N 2°02'27.8""W";45596;;id1.jpg
+35;36885361;-2004861;Botánico 4;Hembra ;¿?;Cultivado;Si;Si;Si;"36°50'58.3""N 2°02'30.6""W ";45596;;id1.jpg
+36;36885694;-2004472;Rodalquilar ;Hembra;¿?(Hembra);Actualmente no;Si;Si;No;36.848730, -2.043119;45596;Puede ser variedad: Mora ;id1.jpg
+37;36816951;-2053419;Las niñas;Hembra;¿? (hembra);Silvestre;Si;Si;No;36.842100, -2.048049;45596;;id1.jpg
+38;36815016;-2053260;Los Albacetes;Macho;No;Cultivado;_;_;Si;36.848475, -2.031420;45596;;id1.jpg
+39;36851500;-2346278;Las negras 1;Hembra;Si (macho);Actualmente no;Si;Si;Si;36.883749, -2.003916;45596;;id1.jpg
+40;37175111;-1958111;Las negras 1;Macho;Si (macho);Actualmente no;_;_;No;36.883749, -2.003916;45596;;id1.jpg
+41;37190306;-1985694;Las negras 2;Macho;No;Actualmente no;_;_;No;"36°53'07.3""N 2°00'17.5""W ";45596;;id1.jpg
+42;37190306;-1985694;Las negras 3;Hembra;Si (macho);;Si;Si;Si;"36°53'08.5""N 2°00'16.1""W";45596;;id1.jpg
+43;37175424;-1987404;Las negras 3;Macho;Si (macho);Actualmente no;_;_;No;"36°53'08.5""N 2°00'16.1""W";45596;;id1.jpg
+44;37175825;-1987455;Isleta 1;Hembra;¿?;Cultivado;Si;Si;Si;36.816951, -2.053419;45596;;id1.jpg
+45;37139056;-1853472;Isleta 2;Hembra;¿? (hembra);Cultivado;Si;Si;SI;36.815016, -2.053260;45596;;id1.jpg
+46;36830149;-2402105;El Alquian;Hembra;¿?;Actualmente no;No;No;No;"36°51'05.4""N 2°20'46.6""W ";45603;No tiene frutos;id1.jpg
+47;36830410;-2402035;Bédar 1;Macho;No;Cultivado;_;_;Si;"37°10'30.4""N 1°57'29.2""W ";45603;;id1.jpg
+48;36830028;-2406111;Bédar 2;Hembra;Si (macho);Actualmente no;Si;Si;No;"37°11'25.1""N 1°59'08.5""W ";45603;;id1.jpg
+49;36830250;-2405750;Bédar 2;Macho;Si (macho);Actualmente no;_;_;no;"37°11'25.1""N 1°59'08.5""W ";45603;;id1.jpg
+50;37108675;-1854027;Bédar 3;Hembra;¿?;Actualmente no;Si;Si;no;"37°11'25.1""N 1°59'08.5""W ";45603;;id1.jpg
+51;37106861;-1849417;La Serena 1;Hembra;¿? (hembra);Actualmente no;Si;Si;Si;37.175424, -1.987404;45603;;id1.jpg
+52;37109194;-1854056;La Serena 2;Hembra;Si (macho);Actualmente no;Si;Si;No;37.175825, -1.987455;45603;;id1.jpg
+53;36931917;-2203833;La Serena 2;Macho;Si (macho);Actualmente no;_;_;No;37.175825, -1.987455;45603;;id1.jpg
+54;37108222;-1855194;Mojacar;Macho;No;Cultivado;_;_;Si;"37°08'20.6""N 1°51'12.5""W";45603;;id1.jpg
+55;37108194;-1855611;UAL1;Hembra;¿?;Cultivado;Si;Si;Si;36.830149, -2.402105;45608;;id1.jpg
+56;36931917;-2203833;UAL2;Macho;No;Cultivado;_;_;Si;36.830410, -2.402035;45608;;id1.jpg
+57;36931917;-2203833;UAL3;Hembra;¿?;Cultivado;Si;Si;SI;"36°49'48.1""N 2°24'22.0""W ";45608;;id1.jpg
+58;36931639;-2203028;UAL4;Macho;No;Cultivado;_;_;Si;"36°49'48.9""N 2°24'20.7""W ";45608;;id1.jpg
+59;37030250;-1878806;MojacarAlto1;¿?;No;Silvestre;_;_;No;37.108675, -1.854027 ;45603;No le encuentro flores;id1.jpg
+60;37030278;-1878000;MojacarAlto2;Hembra;No;Silvestre;Si;Si;No;"37°06'24.7""N 1°50'57.9""W";45617;;id1.jpg
+61;37030167;-1879861;MojacarAlto3;Machos;No;Silvestre;_;_;No;"37°06'33.1""N 1°51'14.6""W ";45617;;id1.jpg
+62;36953889;-2196806;MojacarAlto4;Hembra;No;Silvestre;Si;Si;No;"37°06'33.9""N 1°51'14.1""W";45617;;id1.jpg
+;;;;;;;;;;;;;
+;;;;;;;;;;;;;
