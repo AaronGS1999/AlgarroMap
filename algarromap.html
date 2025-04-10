@@ -18,6 +18,11 @@
             width: 100%;
             height: 100%;
         }
+        .popup-img {
+            display: block;
+            max-width: 100%;
+            height: auto;
+        }
     </style>
 </head>
 <body>
@@ -31,11 +36,12 @@
                 .catch(error => console.error('Error cargando JSON:', error));
         }
 
+        // Mapa físico (relieve topográfico)
         var mymap = L.map('mapid').setView([36.93, -1.99], 13);
 
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
-            maxZoom: 18
+        L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
+            attribution: 'Map data: © <a href="https://www.opentopomap.org/">OpenTopoMap</a> contributors',
+            maxZoom: 17
         }).addTo(mymap);
 
         function getColor(sexo) {
@@ -46,23 +52,31 @@
 
         cargarJSON('datos.json', function(puntos) {
             puntos.forEach(punto => {
-                let popupContent = `<b>${punto.Nombre}</b><br>
-                    Sexo: ${punto.Sexo}<br>
-                    Injerto: ${punto["Injerto (Pie)"]}<br>
-                    Cultivado: ${punto["Silvestre/Cultivado"]}<br>
-                    Fecha de recolección: ${punto["Fecha recolección"]}<br>
-                    Observaciones: ${punto.Observaciones || 'Ninguna'}<br>
-                    <img src='imagenes/${punto.imagen}' width='150px'>`;
-                
-                let marker = L.circleMarker([punto.latitud / 1000000, punto.longitud / 1000000], {
+                const marker = L.circleMarker([punto.latitud / 1000000, punto.longitud / 1000000], {
                     color: getColor(punto.Sexo),
                     radius: 8,
                     fillOpacity: 0.7
                 }).addTo(mymap);
-                
-                marker.bindPopup(popupContent);
+
+                const popup = L.popup();
+
+                const img = new Image();
+                img.src = `imagenes/${punto.imagen}`;
+                img.className = 'popup-img';
+                img.onload = function () {
+                    const popupContent = `<b>${punto.Nombre}</b><br>
+                        Sexo: ${punto.Sexo}<br>
+                        Injerto: ${punto["Injerto (Pie)"]}<br>
+                        Cultivado: ${punto["Silvestre/Cultivado"]}<br>
+                        Fecha de recolección: ${punto["Fecha recolección"]}<br>
+                        Observaciones: ${punto.Observaciones || 'Ninguna'}<br>
+                        <img src='${img.src}' class='popup-img' width='${this.width}' height='${this.height}'>`;
+
+                    marker.bindPopup(popupContent);
+                };
             });
         });
     </script>
 </body>
 </html>
+
