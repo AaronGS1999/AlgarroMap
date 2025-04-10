@@ -22,6 +22,23 @@
             height: 100%;
         }
 
+        .emoji-icon {
+            font-size: 24px;
+            filter: grayscale(0%) brightness(100%);
+        }
+
+        .emoji-macho {
+            filter: hue-rotate(210deg); /* Azul */
+        }
+
+        .emoji-hembra {
+            filter: hue-rotate(0deg); /* Rojo */
+        }
+
+        .emoji-default {
+            filter: grayscale(80%) brightness(80%);
+        }
+
         .popup-content {
             font-family: Arial, sans-serif;
             display: flex;
@@ -73,7 +90,6 @@
             }
         }
 
-        /* Leaflet popup ajustes */
         .leaflet-popup-content-wrapper {
             padding: 0 !important;
             border-radius: 8px;
@@ -117,36 +133,28 @@
                          '<a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)'
         }).addTo(mymap);
 
-        function getColor(sexo) {
-            if (sexo && sexo.toLowerCase() === 'macho') return 'blue';
-            if (sexo && sexo.toLowerCase() === 'hembra') return 'red';
-            return 'gray';
-        }
-
-        function getTreeIcon(color) {
-            const svg = `
-                <svg width="30" height="30" viewBox="0 0 24 24" fill="${color}" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12 2C10.343 2 9 3.343 9 5C9 5.798 9.312 6.519 9.824 7.071C8.417 7.482 7.367 8.7 7.051 10.18C6.439 10.067 5.782 10.177 5.231 10.521C4.264 11.128 4.079 12.443 4.936 13.206C5.278 13.513 5.715 13.683 6.17 13.705C6.055 14.323 6.151 14.974 6.447 15.557C6.987 16.6 8.03 17.268 9.176 17.268H11V22H13V17.268H14.824C15.97 17.268 17.013 16.6 17.553 15.557C17.849 14.974 17.945 14.323 17.83 13.705C18.285 13.683 18.722 13.513 19.064 13.206C19.921 12.443 19.736 11.128 18.769 10.521C18.218 10.177 17.561 10.067 16.949 10.18C16.633 8.7 15.583 7.482 14.176 7.071C14.688 6.519 15 5.798 15 5C15 3.343 13.657 2 12 2Z"/>
-                </svg>
-            `;
-            return L.divIcon({
-                html: svg,
-                className: '',
-                iconSize: [30, 30],
-                iconAnchor: [15, 30],
-                popupAnchor: [0, -30]
-            });
+        function getEmojiClass(sexo) {
+            if (sexo && sexo.toLowerCase() === 'macho') return 'emoji-icon emoji-macho';
+            if (sexo && sexo.toLowerCase() === 'hembra') return 'emoji-icon emoji-hembra';
+            return 'emoji-icon emoji-default';
         }
 
         cargarJSON('datos.json', function(puntos) {
             puntos.forEach(punto => {
                 const lat = punto.latitud / 1000000;
                 const lon = punto.longitud / 1000000;
-                const color = getColor(punto.Sexo);
-                const treeIcon = getTreeIcon(color);
+                const emojiClass = getEmojiClass(punto.Sexo);
+
+                const icon = L.divIcon({
+                    html: `<div class="${emojiClass}" title="${punto.Nombre}">🌳</div>`,
+                    className: '',
+                    iconSize: [30, 30],
+                    iconAnchor: [15, 30],
+                    popupAnchor: [0, -30]
+                });
 
                 const marker = L.marker([lat, lon], {
-                    icon: treeIcon
+                    icon: icon
                 }).addTo(mymap);
 
                 const img = new Image();
