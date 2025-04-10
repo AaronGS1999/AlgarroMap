@@ -22,11 +22,32 @@
             height: 100%;
         }
 
+        .popup-content {
+            font-family: Arial, sans-serif;
+            font-size: 1rem;
+            max-width: 100%;
+        }
+
         .popup-img {
             display: block;
             margin-top: 8px;
             max-width: 100%;
             height: auto;
+            border-radius: 8px;
+        }
+
+        /* Estilos para pantallas pequeñas */
+        @media (max-width: 600px) {
+            .popup-content {
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Estilos para pantallas muy pequeñas */
+        @media (max-width: 400px) {
+            .popup-content {
+                font-size: 0.8rem;
+            }
         }
     </style>
 </head>
@@ -37,65 +58,3 @@
 
     <script>
         function cargarJSON(url, callback) {
-            fetch(url)
-                .then(response => response.json())
-                .then(data => callback(data))
-                .catch(error => console.error('Error cargando JSON:', error));
-        }
-
-        var mymap = L.map('mapid').setView([36.93, -1.99], 13);
-
-        L.tileLayer('https://tile.opentopomap.org/{z}/{x}/{y}.png', {
-            maxZoom: 17,
-            attribution: 'Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ' +
-                         '<a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; ' +
-                         '<a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)'
-        }).addTo(mymap);
-
-        function getColor(sexo) {
-            if (sexo && sexo.toLowerCase() === 'macho') return 'blue';
-            if (sexo && sexo.toLowerCase() === 'hembra') return 'red';
-            return 'gray';
-        }
-
-        cargarJSON('datos.json', function(puntos) {
-            puntos.forEach(punto => {
-                const lat = punto.latitud / 1000000;
-                const lon = punto.longitud / 1000000;
-                const marker = L.circleMarker([lat, lon], {
-                    color: getColor(punto.Sexo),
-                    radius: 8,
-                    fillOpacity: 0.7
-                }).addTo(mymap);
-
-                const img = new Image();
-                img.src = `imagenes/${punto.imagen}`;
-                img.onload = function () {
-                    const popupContent = document.createElement('div');
-                    popupContent.innerHTML = `
-                        <b>${punto.Nombre}</b><br>
-                        Sexo: ${punto.Sexo}<br>
-                        Injerto: ${punto["Injerto (Pie)"]}<br>
-                        Cultivado: ${punto["Silvestre/Cultivado"]}<br>
-                        Fecha de recolección: ${punto["Fecha recolección"]}<br>
-                        Observaciones: ${punto.Observaciones || 'Ninguna'}<br>
-                    `;
-
-                    const imageElement = document.createElement('img');
-                    imageElement.src = img.src;
-                    imageElement.className = 'popup-img';
-
-                    popupContent.appendChild(imageElement);
-
-                    const popup = L.popup({
-                        maxWidth: 300,
-                        autoPan: true
-                    }).setContent(popupContent);
-
-                    marker.bindPopup(popup);
-                };
-            });
-        });
-    </script>
-</body>
-</html>
