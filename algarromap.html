@@ -24,22 +24,36 @@
 
         .popup-content {
             font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: stretch; /* Asegura que los elementos internos se estiren */
             max-height: 90vh;
             overflow-y: auto;
             box-sizing: border-box;
         }
 
-        .popup-img {
+        .popup-img-container {
             width: 100%;
-            max-height: 80vh;
-            object-fit: contain;
+            display: flex;
+            justify-content: center; /* Centra la imagen horizontalmente */
+            align-items: center; /* Centra la imagen verticalmente (si el contenedor tiene altura) */
+            max-height: 70vh; /* Ajusta según necesidad */
+            overflow: hidden; /* Evita que la imagen se desborde */
+            margin-bottom: 10px; /* Espacio entre la imagen y el texto */
+        }
+
+        .popup-img {
             display: block;
-            margin-top: 10px;
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain; /* Asegura que la imagen completa se vea dentro del contenedor */
             border-radius: 8px;
         }
 
         .popup-text {
             font-size: 1rem;
+            padding: 10px;
+            box-sizing: border-box;
         }
 
         @media (max-width: 600px) {
@@ -99,6 +113,14 @@
                     const popupContent = document.createElement('div');
                     popupContent.className = 'popup-content';
 
+                    const imageContainer = document.createElement('div');
+                    imageContainer.className = 'popup-img-container';
+
+                    const imageElement = document.createElement('img');
+                    imageElement.src = img.src;
+                    imageElement.className = 'popup-img';
+                    imageContainer.appendChild(imageElement);
+
                     const text = document.createElement('div');
                     text.className = 'popup-text';
                     text.innerHTML = `
@@ -110,15 +132,12 @@
                         Observaciones: ${punto.Observaciones || 'Ninguna'}<br>
                     `;
 
-                    const imageElement = document.createElement('img');
-                    imageElement.src = img.src;
-                    imageElement.className = 'popup-img';
-
+                    popupContent.appendChild(imageContainer);
                     popupContent.appendChild(text);
-                    popupContent.appendChild(imageElement);
 
                     const popup = L.popup({
                         maxWidth: window.innerWidth * 0.95,
+                        maxHeight: window.innerHeight * 0.9,
                         autoPan: true
                     }).setContent(popupContent);
 
