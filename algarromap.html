@@ -36,12 +36,13 @@
                 .catch(error => console.error('Error cargando JSON:', error));
         }
 
-        // Mapa físico (relieve topográfico)
+        // Mapa físico con Stamen Terrain
         var mymap = L.map('mapid').setView([36.93, -1.99], 13);
 
-        L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
-            attribution: 'Map data: © <a href="https://www.opentopomap.org/">OpenTopoMap</a> contributors',
-            maxZoom: 17
+        L.tileLayer('https://stamen-tiles.a.ssl.fastly.net/terrain/{z}/{x}/{y}.jpg', {
+            attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, ' +
+                         '<a href="http://openstreetmap.org">OpenStreetMap</a> contributors',
+            maxZoom: 18
         }).addTo(mymap);
 
         function getColor(sexo) {
@@ -52,31 +53,35 @@
 
         cargarJSON('datos.json', function(puntos) {
             puntos.forEach(punto => {
-                const marker = L.circleMarker([punto.latitud / 1000000, punto.longitud / 1000000], {
+                const lat = punto.latitud / 1000000;
+                const lon = punto.longitud / 1000000;
+                const marker = L.circleMarker([lat, lon], {
                     color: getColor(punto.Sexo),
                     radius: 8,
                     fillOpacity: 0.7
                 }).addTo(mymap);
 
-                const popup = L.popup();
-
                 const img = new Image();
                 img.src = `imagenes/${punto.imagen}`;
-                img.className = 'popup-img';
                 img.onload = function () {
-                    const popupContent = `<b>${punto.Nombre}</b><br>
+                    const popupContent = `
+                        <b>${punto.Nombre}</b><br>
                         Sexo: ${punto.Sexo}<br>
                         Injerto: ${punto["Injerto (Pie)"]}<br>
                         Cultivado: ${punto["Silvestre/Cultivado"]}<br>
                         Fecha de recolección: ${punto["Fecha recolección"]}<br>
                         Observaciones: ${punto.Observaciones || 'Ninguna'}<br>
-                        <img src='${img.src}' class='popup-img' width='${this.width}' height='${this.height}'>`;
+                        <img src='${img.src}' class='popup-img' width='${this.width}' height='${this.height}'>
+                    `;
 
-                    marker.bindPopup(popupContent);
+                    marker.bindPopup(popupContent, {
+                        maxWidth: this.width + 40,
+                        minWidth: 100,
+                        autoPan: true
+                    });
                 };
             });
         });
     </script>
 </body>
 </html>
-
