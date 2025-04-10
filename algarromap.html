@@ -20,8 +20,7 @@
         }
         .popup-img {
             display: block;
-            max-width: 100%;
-            height: auto;
+            margin-top: 8px;
         }
     </style>
 </head>
@@ -65,21 +64,30 @@
                 const img = new Image();
                 img.src = `imagenes/${punto.imagen}`;
                 img.onload = function () {
-                    const popupContent = `
+                    const popupContent = document.createElement('div');
+                    popupContent.innerHTML = `
                         <b>${punto.Nombre}</b><br>
                         Sexo: ${punto.Sexo}<br>
                         Injerto: ${punto["Injerto (Pie)"]}<br>
                         Cultivado: ${punto["Silvestre/Cultivado"]}<br>
                         Fecha de recolección: ${punto["Fecha recolección"]}<br>
                         Observaciones: ${punto.Observaciones || 'Ninguna'}<br>
-                        <img src='${img.src}' class='popup-img' width='${this.width}' height='${this.height}'>
                     `;
+                    const imageElement = document.createElement('img');
+                    imageElement.src = img.src;
+                    imageElement.className = 'popup-img';
+                    imageElement.width = this.width;
+                    imageElement.height = this.height;
 
-                    marker.bindPopup(popupContent, {
+                    popupContent.appendChild(imageElement);
+
+                    const popup = L.popup({
                         maxWidth: this.width + 40,
-                        minWidth: 100,
+                        minWidth: this.width + 40,
                         autoPan: true
-                    });
+                    }).setContent(popupContent);
+
+                    marker.bindPopup(popup);
                 };
             });
         });
