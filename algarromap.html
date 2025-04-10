@@ -22,19 +22,21 @@
             height: 100%;
         }
 
-        /* Estilo básico para el emoji */
         .emoji-icon {
             font-size: 24px;
+            filter: grayscale(0%) brightness(100%);
         }
 
-        /* Hembra: se usa un filtro rojo */
+        .emoji-macho {
+            filter: hue-rotate(210deg); /* Azul */
+        }
+
         .emoji-hembra {
-            filter: hue-rotate(-50deg) saturate(400%);
+            filter: hue-rotate(0deg); /* Rojo */
         }
 
-        /* Default: se muestran en gris */
         .emoji-default {
-            filter: grayscale(100%) brightness(80%);
+            filter: grayscale(80%) brightness(80%);
         }
 
         .popup-content {
@@ -115,7 +117,6 @@
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
 
     <script>
-        // Función para cargar JSON
         function cargarJSON(url, callback) {
             fetch(url)
                 .then(response => response.json())
@@ -123,10 +124,78 @@
                 .catch(error => console.error('Error cargando JSON:', error));
         }
 
-        // Inicialización del mapa
         const mymap = L.map('mapid').setView([36.93, -1.99], 13);
 
         L.tileLayer('https://tile.opentopomap.org/{z}/{x}/{y}.png', {
             maxZoom: 17,
             attribution: 'Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ' +
-                         '<a href="http://viewfinderpanoramas.org">S
+                         '<a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; ' +
+                         '<a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)'
+        }).addTo(mymap);
+
+        function getEmojiClass(sexo) {
+            if (sexo && sexo.toLowerCase() === 'macho') return 'emoji-icon emoji-macho';
+            if (sexo && sexo.toLowerCase() === 'hembra') return 'emoji-icon emoji-hembra';
+            return 'emoji-icon emoji-default';
+        }
+
+        cargarJSON('datos.json', function(puntos) {
+            puntos.forEach(punto => {
+                const lat = punto.latitud / 1000000;
+                const lon = punto.longitud / 1000000;
+                const emojiClass = getEmojiClass(punto.Sexo);
+
+                const icon = L.divIcon({
+                    html: `<div class="${emojiClass}" title="${punto.Nombre}">🌳</div>`,
+                    className: '',
+                    iconSize: [30, 30],
+                    iconAnchor: [15, 30],
+                    popupAnchor: [0, -30]
+                });
+
+                const marker = L.marker([lat, lon], {
+                    icon: icon
+                }).addTo(mymap);
+
+                const img = new Image();
+                img.src = `imagenes/${punto.imagen}`;
+                img.onload = function () {
+                    const popupContent = document.createElement('div');
+                    popupContent.className = 'popup-content';
+
+                    const imageContainer = document.createElement('div');
+                    imageContainer.className = 'popup-img-container';
+
+                    const imageElement = document.createElement('img');
+                    imageElement.src = img.src;
+                    imageElement.className = 'popup-img';
+                    imageContainer.appendChild(imageElement);
+
+                    const text = document.createElement('div');
+                    text.className = 'popup-text';
+                    text.innerHTML = `
+                        <b>${punto.Nombre}</b><br>
+                        Sexo: ${punto.Sexo}<br>
+                        Injerto: ${punto["Injerto (Pie)"]}<br>
+                        Cultivado: ${punto["Silvestre/Cultivado"]}<br>
+                        Fecha de recolección: ${punto["Fecha recolección"]}<br>
+                        Observaciones: ${punto.Observaciones || 'Ninguna'}<br>
+                    `;
+
+                    popupContent.appendChild(imageContainer);
+                    popupContent.appendChild(text);
+
+                    const popup = L.popup({
+                        maxWidth: 'auto',
+                        maxHeight: 'auto',
+                        className: 'custom-popup',
+                        autoPan: true
+                    }).setContent(popupContent);
+
+                    marker.bindPopup(popup);
+                };
+            });
+        });
+    </script>
+</body>
+</html>
