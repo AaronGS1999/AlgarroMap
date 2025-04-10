@@ -26,34 +26,40 @@
             font-family: Arial, sans-serif;
             display: flex;
             flex-direction: column;
-            align-items: stretch; /* Asegura que los elementos internos se estiren */
-            max-height: 90vh;
-            overflow-y: auto;
+            align-items: center; /* Centrar contenido horizontalmente */
+            justify-content: center; /* Centrar contenido verticalmente */
+            max-width: 95vw !important; /* Ancho máximo del 95% del viewport */
+            max-height: 95vh !important; /* Alto máximo del 95% del viewport */
+            overflow: auto; /* Permitir scroll si el contenido excede la pantalla */
             box-sizing: border-box;
+            padding: 10px; /* Añadir un poco de espacio alrededor del contenido */
         }
 
         .popup-img-container {
-            width: 100%;
+            width: 100%; /* Ocupar todo el ancho disponible del popup */
+            height: auto; /* La altura se ajustará según la imagen */
             display: flex;
-            justify-content: center; /* Centra la imagen horizontalmente */
-            align-items: center; /* Centra la imagen verticalmente (si el contenedor tiene altura) */
-            max-height: 70vh; /* Ajusta según necesidad */
-            overflow: hidden; /* Evita que la imagen se desborde */
+            justify-content: center; /* Centrar la imagen horizontalmente */
+            align-items: center; /* Centrar la imagen verticalmente */
+            flex-grow: 1; /* Permite que el contenedor de la imagen crezca para ocupar el espacio */
+            overflow: hidden; /* Asegura que la imagen no se desborde */
             margin-bottom: 10px; /* Espacio entre la imagen y el texto */
+            border-radius: 8px; /* Mantener el borde redondeado */
         }
 
         .popup-img {
             display: block;
             max-width: 100%;
             max-height: 100%;
-            object-fit: contain; /* Asegura que la imagen completa se vea dentro del contenedor */
-            border-radius: 8px;
+            object-fit: contain; /* Escalar la imagen manteniendo la relación de aspecto */
         }
 
         .popup-text {
             font-size: 1rem;
+            text-align: center; /* Centrar el texto */
             padding: 10px;
             box-sizing: border-box;
+            width: 100%; /* Ocupar todo el ancho disponible */
         }
 
         @media (max-width: 600px) {
@@ -136,8 +142,9 @@
                     popupContent.appendChild(text);
 
                     const popup = L.popup({
-                        maxWidth: window.innerWidth * 0.95,
-                        maxHeight: window.innerHeight * 0.9,
+                        maxWidth: 'auto', // Dejar que el CSS controle el ancho máximo
+                        maxHeight: 'auto', // Dejar que el CSS controle la altura máxima
+                        className: 'custom-popup', // Añadir una clase para estilos específicos del popup en Leaflet
                         autoPan: true
                     }).setContent(popupContent);
 
@@ -146,5 +153,22 @@
             });
         });
     </script>
+
+    <style>
+        /* Estilos específicos para el contenedor del popup de Leaflet */
+        .leaflet-popup-content-wrapper {
+            padding: 0 !important; /* Eliminar el padding por defecto del wrapper */
+            border-radius: 8px;
+        }
+
+        .leaflet-popup-content {
+            margin: 0 !important; /* Eliminar el margen por defecto del contenido */
+            width: auto !important; /* Dejar que el contenido controle el ancho */
+        }
+
+        .leaflet-popup-tip-container {
+            display: none !important; /* Ocultar la flecha del popup si no se ve bien con el nuevo estilo */
+        }
+    </style>
 </body>
 </html>
