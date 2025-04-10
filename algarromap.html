@@ -21,6 +21,15 @@
         .popup-img {
             display: block;
             margin-top: 8px;
+            max-width: 100%; 
+            height: auto;
+        }
+        /* Estilos para el contenedor del popup en móviles */
+        .leaflet-popup-content-wrapper {
+            overflow-x: auto; 
+        }
+        .leaflet-popup-content {
+            width: auto !important; 
         }
     </style>
 </head>
@@ -76,15 +85,13 @@
                     const imageElement = document.createElement('img');
                     imageElement.src = img.src;
                     imageElement.className = 'popup-img';
-                    imageElement.width = this.width;
-                    imageElement.height = this.height;
 
                     popupContent.appendChild(imageElement);
 
                     const popup = L.popup({
-                        maxWidth: this.width + 40,
-                        minWidth: this.width + 40,
-                        autoPan: true
+                        maxWidth: 'auto', 
+                        autoPan: true,
+                        keepInView: true 
                     }).setContent(popupContent);
 
                     marker.bindPopup(popup);
