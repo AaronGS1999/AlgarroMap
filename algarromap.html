@@ -67,6 +67,7 @@
             width: 100%;
             height: 100%;
             object-fit: contain;
+            cursor: zoom-in;
         }
 
         .popup-text {
@@ -109,10 +110,36 @@
         .leaflet-popup-tip-container {
             display: none !important;
         }
+
+        /* Estilos para la imagen ampliada */
+        #img-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        #img-overlay-content {
+            max-width: 90vw;
+            max-height: 90vh;
+            border-radius: 10px;
+            box-shadow: 0 0 10px #000;
+        }
     </style>
 </head>
 <body>
     <div id="mapid"></div>
+
+    <!-- Overlay para imagen ampliada -->
+    <div id="img-overlay">
+        <img id="img-overlay-content" src="" alt="Imagen ampliada">
+    </div>
 
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
 
@@ -169,6 +196,7 @@
                     const imageElement = document.createElement('img');
                     imageElement.src = img.src;
                     imageElement.className = 'popup-img';
+                    imageElement.addEventListener('click', () => ampliarImagen(img.src));
                     imageContainer.appendChild(imageElement);
 
                     const text = document.createElement('div');
@@ -191,6 +219,17 @@
                     marker.bindPopup(popup);
                 };
             });
+        });
+
+        function ampliarImagen(src) {
+            const overlay = document.getElementById('img-overlay');
+            const overlayImg = document.getElementById('img-overlay-content');
+            overlayImg.src = src;
+            overlay.style.display = 'flex';
+        }
+
+        document.getElementById('img-overlay').addEventListener('click', function () {
+            this.style.display = 'none';
         });
     </script>
 </body>
