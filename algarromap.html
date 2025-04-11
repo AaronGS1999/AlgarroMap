@@ -139,7 +139,7 @@
             return 'emoji-icon emoji-default';
         }
 
-        cargarJSON('datosv2.json', function(puntos) {
+        cargarJSON('datos.json', function(puntos) {
             puntos.forEach(punto => {
                 const lat = punto.latitud / 1000000;
                 const lon = punto.longitud / 1000000;
