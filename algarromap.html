@@ -146,7 +146,7 @@
                 const emojiClass = getEmojiClass(punto.Sexo);
 
                 const icon = L.divIcon({
-                    html: `<div class="${emojiClass}" title="${punto.Nombre}">🌳</div>`,
+                    html: `<div class="${emojiClass}" title="${punto.id}">🌳</div>`,
                     className: '',
                     iconSize: [30, 30],
                     iconAnchor: [15, 30],
@@ -174,6 +174,10 @@
                     const text = document.createElement('div');
                     text.className = 'popup-text';
                     text.innerHTML = `
+                        <p><strong>ID:</strong> ${punto.id}</p>
+                        <p><strong>Latitud:</strong> ${lat.toFixed(6)}</p>
+                        <p><strong>Longitud:</strong> ${lon.toFixed(6)}</p>
+                        <p><strong>Sexo:</strong> ${punto.Sexo || 'Desconocido'}</p>
                     `;
 
                     popupContent.appendChild(imageContainer);
@@ -185,6 +189,29 @@
                         className: 'custom-popup',
                         autoPan: true
                     }).setContent(popupContent);
+
+                    marker.bindPopup(popup);
+                };
+                img.onerror = function() {
+                    const popupContent = document.createElement('div');
+                    popupContent.className = 'popup-content';
+
+                    const text = document.createElement('div');
+                    text.className = 'popup-text';
+                    text.innerHTML = `
+                        <p><strong>ID:</strong> ${punto.id}</p>
+                        <p><strong>Latitud:</strong> ${lat.toFixed(6)}</p>
+                        <p><strong>Longitud:</strong> ${lon.toFixed(6)}</p>
+                        <p><strong>Sexo:</strong> ${punto.Sexo || 'Desconocido'}</p>
+                        <p><strong>Imagen no encontrada.</strong></p>
+                    `;
+
+                    const popup = L.popup({
+                        maxWidth: 'auto',
+                        maxHeight: 'auto',
+                        className: 'custom-popup',
+                        autoPan: true
+                    }).setContent(text);
 
                     marker.bindPopup(popup);
                 };
