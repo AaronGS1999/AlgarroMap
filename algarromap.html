@@ -1,358 +1,197 @@
 <!DOCTYPE html>
-
 <html>
-
 <head>
-
-<title>Mapa Interactivo con JSON</title>
-
-<meta charset="utf-8" />
-
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
-
-
-<style>
-
-html, body {
-
-height: 100%;
-
-margin: 0;
-
-padding: 0;
-
-}
-
-
-#mapid {
-
-position: absolute;
-
-top: 0;
-
-left: 0;
-
-width: 100%;
-
-height: 100%;
-
-}
-
-
-.emoji-icon {
-
-font-size: 24px;
-
-filter: grayscale(0%) brightness(100%);
-
-}
-
-
-.emoji-macho {
-
-filter: hue-rotate(0deg);
-
-}
-
-
-.emoji-hembra {
-
-filter: hue-rotate(210deg);
-
-}
-
-
-.emoji-default {
-
-filter: grayscale(80%) brightness(80%);
-
-}
-
-
-.popup-content {
-
-font-family: Arial, sans-serif;
-
-display: flex;
-
-flex-direction: column;
-
-align-items: center;
-
-justify-content: center;
-
-width: 95vw;
-
-height: 95vh;
-
-overflow: auto;
-
-box-sizing: border-box;
-
-padding: 10px;
-
-}
-
-
-.popup-img-container {
-
-width: 100%;
-
-height: 60vh;
-
-display: flex;
-
-justify-content: center;
-
-align-items: center;
-
-overflow: hidden;
-
-margin-bottom: 10px;
-
-border-radius: 8px;
-
-}
-
-
-.popup-img {
-
-width: 100%;
-
-height: 100%;
-
-object-fit: contain;
-
-}
-
-
-.popup-text {
-
-font-size: 1rem;
-
-text-align: center;
-
-padding: 10px;
-
-box-sizing: border-box;
-
-width: 100%;
-
-overflow-wrap: break-word;
-
-}
-
-
-@media (max-width: 600px) {
-
-.popup-text {
-
-font-size: 0.9rem;
-
-}
-
-}
-
-
-@media (max-width: 400px) {
-
-.popup-text {
-
-font-size: 0.8rem;
-
-}
-
-}
-
-
-.leaflet-popup-content-wrapper {
-
-padding: 0 !important;
-
-border-radius: 8px;
-
-max-width: 100vw !important;
-
-max-height: 100vh !important;
-
-}
-
-
-.leaflet-popup-content {
-
-margin: 0 !important;
-
-width: 100% !important;
-
-height: 100% !important;
-
-display: flex;
-
-justify-content: center;
-
-align-items: center;
-
-}
-
-
-.leaflet-popup-tip-container {
-
-display: none !important;
-
-}
-
-</style>
-
+    <title>Mapa Interactivo con JSON</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        #mapid {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .emoji-icon {
+            font-size: 24px;
+            filter: grayscale(0%) brightness(100%);
+        }
+
+        .emoji-macho {
+            filter: hue-rotate(0deg);
+        }
+
+        .emoji-hembra {
+            filter: hue-rotate(210deg);
+        }
+
+        .emoji-default {
+            filter: grayscale(80%) brightness(80%);
+        }
+
+        .popup-content {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 95vw;
+            height: 95vh;
+            overflow: auto;
+            box-sizing: border-box;
+            padding: 10px;
+        }
+
+        .popup-img-container {
+            width: 100%;
+            height: 60vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            margin-bottom: 10px;
+            border-radius: 8px;
+        }
+
+        .popup-img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .popup-text {
+            font-size: 1rem;
+            text-align: center;
+            padding: 10px;
+            box-sizing: border-box;
+            width: 100%;
+            overflow-wrap: break-word;
+        }
+
+        @media (max-width: 600px) {
+            .popup-text {
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .popup-text {
+                font-size: 0.8rem;
+            }
+        }
+
+        .leaflet-popup-content-wrapper {
+            padding: 0 !important;
+            border-radius: 8px;
+            max-width: 100vw !important;
+            max-height: 100vh !important;
+        }
+
+        .leaflet-popup-content {
+            margin: 0 !important;
+            width: 100% !important;
+            height: 100% !important;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .leaflet-popup-tip-container {
+            display: none !important;
+        }
+    </style>
 </head>
-
 <body>
-
-<div id="mapid"></div>
-
-
-<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
-
-
-<script>
-
-function cargarJSON(url, callback) {
-
-fetch(url)
-
-.then(response => response.json())
-
-.then(data => callback(data))
-
-.catch(error => console.error('Error cargando JSON:', error));
-
-}
-
-
-const mymap = L.map('mapid').setView([36.93, -1.99], 13);
-
-
-L.tileLayer('https://tile.opentopomap.org/{z}/{x}/{y}.png', {
-
-maxZoom: 17,
-
-attribution: 'Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ' +
-
-'<a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; ' +
-
-'<a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)'
-
-}).addTo(mymap);
-
-
-function getEmojiClass(sexo) {
-
-if (sexo && sexo.toLowerCase() === 'macho') return 'emoji-icon emoji-macho';
-
-if (sexo && sexo.toLowerCase() === 'hembra') return 'emoji-icon emoji-hembra';
-
-return 'emoji-icon emoji-default';
-
-}
-
-
-cargarJSON('datos.json', function(puntos) {
-
-puntos.forEach(punto => {
-
-const lat = punto.latitud / 1000000;
-
-const lon = punto.longitud / 1000000;
-
-const emojiClass = getEmojiClass(punto.Sexo);
-
-
-const icon = L.divIcon({
-
-html: `<div class="${emojiClass}" title="${punto.Nombre}">🌳</div>`,
-
-className: '',
-
-iconSize: [30, 30],
-
-iconAnchor: [15, 30],
-
-popupAnchor: [0, -30]
-
-});
-
-
-const marker = L.marker([lat, lon], {
-
-icon: icon
-
-}).addTo(mymap);
-
-
-const img = new Image();
-
-img.src = `imagenes/${punto.imagen}`;
-
-img.onload = function () {
-
-const popupContent = document.createElement('div');
-
-popupContent.className = 'popup-content';
-
-
-const imageContainer = document.createElement('div');
-
-imageContainer.className = 'popup-img-container';
-
-
-const imageElement = document.createElement('img');
-
-imageElement.src = img.src;
-
-imageElement.className = 'popup-img';
-
-imageContainer.appendChild(imageElement);
-
-
-const text = document.createElement('div');
-
-text.className = 'popup-text';
-
-text.innerHTML = `
-
-`;
-
-
-popupContent.appendChild(imageContainer);
-
-popupContent.appendChild(text);
-
-
-const popup = L.popup({
-
-maxWidth: 'auto',
-
-maxHeight: 'auto',
-
-className: 'custom-popup',
-
-autoPan: true
-
-}).setContent(popupContent);
-
-
-marker.bindPopup(popup);
-
-};
-
-});
-
-});
-
-</script>
-
+    <div id="mapid"></div>
+
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+
+    <script>
+        function cargarJSON(url, callback) {
+            fetch(url)
+                .then(response => response.json())
+                .then(data => callback(data))
+                .catch(error => console.error('Error cargando JSON:', error));
+        }
+
+        const mymap = L.map('mapid').setView([36.93, -1.99], 13);
+
+        L.tileLayer('https://tile.opentopomap.org/{z}/{x}/{y}.png', {
+            maxZoom: 17,
+            attribution: 'Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ' +
+                         '<a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; ' +
+                         '<a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)'
+        }).addTo(mymap);
+
+        function getEmojiClass(sexo) {
+            if (sexo && sexo.toLowerCase() === 'macho') return 'emoji-icon emoji-macho';
+            if (sexo && sexo.toLowerCase() === 'hembra') return 'emoji-icon emoji-hembra';
+            return 'emoji-icon emoji-default';
+        }
+
+        cargarJSON('datos.json', function(puntos) {
+            puntos.forEach(punto => {
+                const lat = punto.latitud / 1000000;
+                const lon = punto.longitud / 1000000;
+                const emojiClass = getEmojiClass(punto.Sexo);
+
+                const icon = L.divIcon({
+                    html: `<div class="${emojiClass}" title="ID: ${punto.id}">🌳</div>`,
+                    className: '',
+                    iconSize: [30, 30],
+                    iconAnchor: [15, 30],
+                    popupAnchor: [0, -30]
+                });
+
+                const marker = L.marker([lat, lon], {
+                    icon: icon
+                }).addTo(mymap);
+
+                const img = new Image();
+                img.src = `imagenes/${punto.imagen}`;
+                img.onload = function () {
+                    const popupContent = document.createElement('div');
+                    popupContent.className = 'popup-content';
+
+                    const imageContainer = document.createElement('div');
+                    imageContainer.className = 'popup-img-container';
+
+                    const imageElement = document.createElement('img');
+                    imageElement.src = img.src;
+                    imageElement.className = 'popup-img';
+                    imageContainer.appendChild(imageElement);
+
+                    const text = document.createElement('div');
+                    text.className = 'popup-text';
+                    text.innerHTML = `
+                        <strong>ID:</strong> ${punto.id}<br>
+                        <strong>Sexo:</strong> ${punto.Sexo}
+                    `;
+
+                    popupContent.appendChild(imageContainer);
+                    popupContent.appendChild(text);
+
+                    const popup = L.popup({
+                        maxWidth: 'auto',
+                        maxHeight: 'auto',
+                        className: 'custom-popup',
+                        autoPan: true
+                    }).setContent(popupContent);
+
+                    marker.bindPopup(popup);
+                };
+            });
+        });
+    </script>
 </body>
-
-</html> 
+</html>
