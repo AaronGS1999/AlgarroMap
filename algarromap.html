@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Mapa Interactivo con JSON</title>
+    <title>Mapa interactivo de árboles muestreados de algarrobo</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -37,78 +37,6 @@
 
         .emoji-default {
             filter: grayscale(80%) brightness(80%);
-        }
-
-        .popup-content {
-            font-family: Arial, sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            width: 95vw;
-            height: 95vh;
-            overflow: auto;
-            box-sizing: border-box;
-            padding: 10px;
-        }
-
-        .popup-img-container {
-            width: 100%;
-            height: 60vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-            margin-bottom: 10px;
-            border-radius: 8px;
-        }
-
-        .popup-img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            cursor: zoom-in;
-        }
-
-        .popup-text {
-            font-size: 1rem;
-            text-align: center;
-            padding: 10px;
-            box-sizing: border-box;
-            width: 100%;
-            overflow-wrap: break-word;
-        }
-
-        @media (max-width: 600px) {
-            .popup-text {
-                font-size: 0.9rem;
-            }
-        }
-
-        @media (max-width: 400px) {
-            .popup-text {
-                font-size: 0.8rem;
-            }
-        }
-
-        .leaflet-popup-content-wrapper {
-            padding: 0 !important;
-            border-radius: 8px;
-            max-width: 100vw !important;
-            max-height: 100vh !important;
-        }
-
-        .leaflet-popup-content {
-            margin: 0 !important;
-            width: 100% !important;
-            height: 100% !important;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .leaflet-popup-tip-container {
-            display: none !important;
         }
 
         /* Estilos para la imagen ampliada */
@@ -187,36 +115,7 @@
                 const img = new Image();
                 img.src = `imagenes/${punto.imagen}`;
                 img.onload = function () {
-                    const popupContent = document.createElement('div');
-                    popupContent.className = 'popup-content';
-
-                    const imageContainer = document.createElement('div');
-                    imageContainer.className = 'popup-img-container';
-
-                    const imageElement = document.createElement('img');
-                    imageElement.src = img.src;
-                    imageElement.className = 'popup-img';
-                    imageElement.addEventListener('click', () => ampliarImagen(img.src));
-                    imageContainer.appendChild(imageElement);
-
-                    const text = document.createElement('div');
-                    text.className = 'popup-text';
-                    text.innerHTML = `
-                        <strong>ID:</strong> ${punto.id}<br>
-                        <strong>Sexo:</strong> ${punto.Sexo}
-                    `;
-
-                    popupContent.appendChild(imageContainer);
-                    popupContent.appendChild(text);
-
-                    const popup = L.popup({
-                        maxWidth: 'auto',
-                        maxHeight: 'auto',
-                        className: 'custom-popup',
-                        autoPan: true
-                    }).setContent(popupContent);
-
-                    marker.bindPopup(popup);
+                    marker.on('click', () => ampliarImagen(img.src));
                 };
             });
         });
