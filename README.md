@@ -1,9 +1,6 @@
 # AlgarroMap: Mapa Interactivo
 
-[![Mantenido por Aaron Gálvez Salido](https://img.shields.io/badge/Mantenido%20por-Aaron%20G%C3%A1lvez%20Salido-blue)](mailto:ags408@ual.es)
-[![Colaborador Laura Flores Fernández](https://img.shields.io/badge/Colaborador-Laura%20Flores%20Fern%C3%A1ndez-brightgreen)]()
-
-[![AlgarroMap](https://img.shields.io/badge/Web-AlgarroMap-orange)](https://aarongs1999.github.io/AlgarroMap/)
+[![Mantenido por Aaron Gálvez Salido](https://img.shields.io/badge/Mantenido%20por-Aaron%20G%C3%A1lvez%20Salido-blue)](mailto:ags408@ual.es) [![Colaborador Laura Flores Fernández](https://img.shields.io/badge/Colaborador-Laura%20Flores%20Fern%C3%A1ndez-brightgreen)]() [![AlgarroMap](https://img.shields.io/badge/Web-AlgarroMap-orange)](https://aarongs1999.github.io/AlgarroMap/)
 
 
 Este repositorio contiene los elementos necesarios para el mapa interactivo **AlgarroMap**.
