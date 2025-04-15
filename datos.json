@@ -5,5 +5,79 @@
       "longitud": -1985694,
       "imagen": "Bedar3.png",
       "Sexo": "Hembra"
+    },
+    {
+      "id": 2,
+      "latitud": 36930819,
+      "longitud": -1989421,
+      "imagen": "ElDeCristobal.png",
+      "Sexo": "Hembra",
+      "injertada": "si"
+    },
+    {
+      "id": 3,
+      "latitud": 37072006,
+      "longitud": -1863101,
+      "imagen": "Enmedio2.png",
+      "Sexo": "Hembra",
+      "injertada": "no"
+    },
+    {
+      "id": 4,
+      "latitud": 37071220,
+      "longitud": -1861675,
+      "imagen": "Enmedio3.png",
+      "Sexo": "Hembra",
+      "injertada": "no"
+    },
+    {
+      "id": 5,
+      "latitud": 37071429,
+      "longitud": -1866478,
+      "imagen": "Enmedio5.png",
+      "Sexo": "Hembra",
+      "injertada": "si"
+    },
+    {
+      "id": 6,
+      "latitud": 37073493,
+      "longitud": -1860221,
+      "imagen": "GolfI.png",
+      "Sexo": "Hembra",
+      "injertada": "no"
+    },
+    {
+      "id": 7,
+      "latitud": 37161635,
+      "longitud": -2074518,
+      "imagen": "LaPileta2.png",
+      "Sexo": "Hembra, quizás hermafrodita",
+      "injertada": "no"
+    },
+    {
+      "id": 8,
+      "latitud": 37036930,
+      "longitud": -2194390,
+      "imagen": "Lucainena4.png",
+      "Sexo": "Hembra",
+      "injertada": "no"
+    },
+    {
+      "id": 9,
+      "latitud": 37105732,
+      "longitud": -2043455,
+      "imagen": "Marchalico3.png",
+      "Sexo": "Hembra",
+      "injertada": "no"
+    },
+    {
+      "id": 10,
+      "latitud": 36819944,
+      "longitud": -2652833,
+      "imagen": "VicarI.png",
+      "Sexo": "Hembra",
+      "injertada": "si"
     }
 ]
+
+
