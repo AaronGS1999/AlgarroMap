@@ -113,7 +113,7 @@
                 }).addTo(mymap);
 
                 const img = new Image();
-                img.src = `imagenes/${punto.imagen}`;
+                img.src = `Imágenes/${punto.imagen}`;
                 img.onload = function () {
                     marker.on('click', () => ampliarImagen(img.src));
                 };
