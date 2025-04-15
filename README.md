@@ -33,6 +33,6 @@ Este repositorio contiene los siguientes elementos clave:
 
 * **`datos.json`**: Archivo principal en formato JSON que almacena la información detallada de los diferentes árboles de algarrobo muestreados.
 * **`imágenes`**: Directorio que contiene las fichas (imágenes) correspondientes a cada individuo muestreado. Cada archivo de imagen debería estar nombrado de forma que se pueda relacionar con la información del archivo `algarrobos.json`.
-* **`index.html`**: El archivo HTML principal que estructura y genera el mapa interactivo en el navegador. Este archivo utiliza la información del archivo `algarrobos.json` y las imágenes de la carpeta `Imágenes/` para mostrar los datos sobre un mapa base proporcionado por [OpenTopoMap](https://opentopomap.org/).
+* **`index.html`**: El archivo HTML principal que estructura y genera el mapa interactivo en el navegador. Este archivo utiliza la información del archivo `algarrobos.json` y las imágenes de la carpeta `Imágenes` para mostrar los datos sobre un mapa base proporcionado por [OpenTopoMap](https://opentopomap.org/).
 
 ## ¡Gracias por visitar este repositorio!
