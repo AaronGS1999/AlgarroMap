@@ -97,7 +97,7 @@ cargarJSON('Datos/datos.json', function(puntos) {
     });
  // Leyenda 
 const legendContent = `
-    <div style="text-align:center;">
+     <div style="text-align:center; width: 250px; padding: 10px;">
         <h3>Total de Árboles: ${totalArboles}</h3>
         <img src="Iconos/Algarrobo_color.png" alt="Árbol" style="width: 30px; height: 30px;" />
         <h4>Desglose:</h4>
