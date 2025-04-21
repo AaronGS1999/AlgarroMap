@@ -105,7 +105,7 @@ puntos.forEach(punto => {
 
 // Leyenda
 const legendContent = `
-    <div id="legend-popup-content" style="padding: 20px; background-color: white; border: 1px solid #ccc; border-radius: 5px; font-size: 16px; max-width: 90vw; max-height: 80vh; overflow-y: auto;">
+    <div id="legend-popup-content" style="padding: 20px; background-color: white; border: 1px solid #ccc; border-radius: 5px; font-size: 16px; max-width: 100vw; max-height: 90vh; overflow-y: auto;">
         <h4 style="margin-top: 0; text-align: left;">Leyenda</h4>
         <div style="display: flex; align-items: center; margin-bottom: 10px;">
             <img src="Iconos/injerto.png" alt="Injertada" style="width: 50px; height: 50px; margin-right: 10px;">
@@ -132,7 +132,6 @@ const legendContent = `
             <img src="Iconos/Algarrobo_color.png" alt="Total Árboles" style="width: 50px; height: 50px; margin-right: 10px;">
             <span>Total de Árboles: ${totalArboles}</span>
         </div>
-        <button onclick="mymap.closePopup();" style="padding: 10px 15px; margin-top: 15px; font-size: 16px;">Cerrar</button>
     </div>
 `;
 
