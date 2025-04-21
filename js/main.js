@@ -32,9 +32,9 @@ function getIconUrl(punto) {
 
 function getIconSize() {
     if (window.innerWidth < 768) {
-        return [80, 80]; // Tamaño para móviles
+        return [80, 80]; 
     } else {
-        return [120, 120]; // Tamaño para escritorio
+        return [100, 100]; 
     }
 }
 
