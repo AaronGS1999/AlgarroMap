@@ -6,130 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
-
-    <style>
-        html, body {
-            height: 100%;
-            margin: 0;
-            padding: 0;
-        }
-
-        #mapid {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
-
-        .emoji-icon {
-            font-size: 24px;
-            filter: grayscale(0%) brightness(100%);
-        }
-
-        .emoji-macho {
-            filter: hue-rotate(0deg);
-        }
-
-        .emoji-hembra {
-            filter: hue-rotate(210deg);
-        }
-
-        .emoji-default {
-            filter: grayscale(80%) brightness(80%);
-        }
-
-        /* Estilos para la imagen ampliada */
-        #img-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: rgba(0, 0, 0, 0.8);
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-        }
-
-        #img-overlay-content {
-            max-width: 90vw;
-            max-height: 90vh;
-            border-radius: 10px;
-            box-shadow: 0 0 10px #000;
-        }
-    </style>
+    <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body>
     <div id="mapid"></div>
 
-    <!-- Overlay para imagen ampliada -->
     <div id="img-overlay">
         <img id="img-overlay-content" src="" alt="Imagen ampliada">
     </div>
 
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
-
-    <script>
-        function cargarJSON(url, callback) {
-            fetch(url)
-                .then(response => response.json())
-                .then(data => callback(data))
-                .catch(error => console.error('Error cargando JSON:', error));
-        }
-
-        const mymap = L.map('mapid').setView([36.93, -1.99], 13);
-
-        L.tileLayer('https://tile.opentopomap.org/{z}/{x}/{y}.png', {
-            maxZoom: 17,
-            attribution: 'Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ' +
-                         '<a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; ' +
-                         '<a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)'
-        }).addTo(mymap);
-
-        function getEmojiClass(sexo) {
-            if (sexo && sexo.toLowerCase() === 'macho') return 'emoji-icon emoji-macho';
-            if (sexo && sexo.toLowerCase() === 'hembra') return 'emoji-icon emoji-hembra';
-            return 'emoji-icon emoji-default';
-        }
-
-        cargarJSON('datos.json', function(puntos) {
-            puntos.forEach(punto => {
-                const lat = punto.latitud / 1000000;
-                const lon = punto.longitud / 1000000;
-                const emojiClass = getEmojiClass(punto.Sexo);
-
-                const icon = L.divIcon({
-                    html: `<div class="${emojiClass}" title="ID: ${punto.id}">🌳</div>`,
-                    className: '',
-                    iconSize: [30, 30],
-                    iconAnchor: [15, 30],
-                    popupAnchor: [0, -30]
-                });
-
-                const marker = L.marker([lat, lon], {
-                    icon: icon
-                }).addTo(mymap);
-
-                const img = new Image();
-                img.src = `Imágenes/${punto.imagen}`;
-                img.onload = function () {
-                    marker.on('click', () => ampliarImagen(img.src));
-                };
-            });
-        });
-
-        function ampliarImagen(src) {
-            const overlay = document.getElementById('img-overlay');
-            const overlayImg = document.getElementById('img-overlay-content');
-            overlayImg.src = src;
-            overlay.style.display = 'flex';
-        }
-
-        document.getElementById('img-overlay').addEventListener('click', function () {
-            this.style.display = 'none';
-        });
-    </script>
+    <script src="js/main.js"></script>
 </body>
 </html>
