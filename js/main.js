@@ -128,7 +128,7 @@ const legendContent = `
             <span style="text-align: left;">Otros: ${tiposArboles.otros}</span>
         </div>
         <hr style="margin-top: 15px; margin-bottom: 10px;">
-        <div style="display: flex; align-items: center; text-align: left; font-weight: bold;">
+        <div style="display: flex; align-items: center; text-align: left;">
             <img src="Iconos/Algarrobo_color.png" alt="Total de árboles" style="width: 50px; height: 50px; margin-right: 10px;">
             <span>Total de Árboles: ${totalArboles}</span>
         </div>
