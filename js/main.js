@@ -38,9 +38,9 @@ cargarJSON('Datos/datos.json', function(puntos) {
 
         const customIcon = L.icon({
             iconUrl: iconUrl,
-            iconSize: [50, 50],
-            iconAnchor: [25, 50],
-            popupAnchor: [0, -50]
+            iconSize: [80, 80],
+            iconAnchor: [45, 70],
+            popupAnchor: [0, -80]
         });
 
         const marker = L.marker([lat, lon], { icon: customIcon }).addTo(mymap);
