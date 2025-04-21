@@ -20,7 +20,7 @@ function getEmojiClass(sexo) {
     return 'emoji-icon emoji-default';
 }
 
-cargarJSON('datos/datos.json', function(puntos) {
+cargarJSON('Datos/datos.json', function(puntos) {
     puntos.forEach(punto => {
         const lat = punto.latitud / 1000000;
         const lon = punto.longitud / 1000000;
@@ -37,7 +37,7 @@ cargarJSON('datos/datos.json', function(puntos) {
         const marker = L.marker([lat, lon], { icon: icon }).addTo(mymap);
 
         const img = new Image();
-        img.src = `Imágenes/${punto.imagen}`;
+        img.src = `Fichas/${punto.imagen}`;
         img.onload = function () {
             marker.on('click', () => ampliarImagen(img.src));
         };
