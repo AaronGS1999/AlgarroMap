@@ -35,9 +35,9 @@ function getIconUrl(punto) {
 
 function getIconSize() {
     if (window.innerWidth < 768) {
-        return [80, 80]; // Iconos más grandes en móviles
+        return [80, 80]; 
     } else {
-        return [40, 40]; // Iconos más grandes en ordenador (ajusta según necesites)
+        return [80, 80]; 
     }
 }
 
@@ -105,7 +105,7 @@ puntos.forEach(punto => {
 
 // Leyenda
 const legendContent = `
-    <div id="legend-popup-content" style="padding: 20px; background-color: white; border: 1px solid #ccc; border-radius: 5px; font-size: 16px; max-width: 100vw; max-height: 90vh; overflow-y: auto;">
+    <div id="legend-popup-content" style="padding: 20px; background-color: white; border: 1px solid #ccc; border-radius: 5px; font-size: 16px; max-width: calc(100vw - 40px); max-height: 85vh; overflow-y: auto;">
         <h4 style="margin-top: 0; text-align: left;">Leyenda</h4>
         <div style="display: flex; align-items: center; margin-bottom: 10px;">
             <img src="Iconos/injerto.png" alt="Injertada" style="width: 50px; height: 50px; margin-right: 10px;">
@@ -128,12 +128,13 @@ const legendContent = `
             <span style="text-align: left;">Otros: ${tiposArboles.otros}</span>
         </div>
         <hr style="margin-top: 15px; margin-bottom: 10px;">
-        <div style="display: flex; align-items: center; text-align: left; font-weight: bold; font-size: 18px;">
-            <img src="Iconos/Algarrobo_color.png" alt="Total Árboles" style="width: 50px; height: 50px; margin-right: 10px;">
+        <div style="display: flex; align-items: center; text-align: left; font-weight: bold;">
+            <img src="Iconos/Algarrobo_color.png" alt="Total de árboles" style="width: 50px; height: 50px; margin-right: 10px;">
             <span>Total de Árboles: ${totalArboles}</span>
         </div>
     </div>
 `;
+
 
 
     // Crear el popup de la leyenda y abrirlo en el mapa
