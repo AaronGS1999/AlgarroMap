@@ -15,14 +15,16 @@ L.tileLayer('https://tile.opentopomap.org/{z}/{x}/{y}.png', {
 }).addTo(mymap);
 
 function getIconUrl(punto) {
+    const sexo = punto.Sexo ? punto.Sexo.toLowerCase() : '';
+
     if (punto.injertada && punto.injertada.toLowerCase() === 'si') {
         return 'Iconos/injerto.png';
-    } else if (punto.Sexo && punto.Sexo.toLowerCase().includes('hembra')) {
-        return 'Iconos/hembra.png';
-    } else if (punto.Sexo && punto.Sexo.toLowerCase() === 'macho') {
-        return 'Iconos/macho.png';
-    } else if (punto.Sexo && punto.Sexo.toLowerCase().includes('hermafrodita')) {
+    } else if (sexo.includes('hermafrodita')) {
         return 'Iconos/hermafrodita.png';
+    } else if (sexo.includes('hembra')) {
+        return 'Iconos/hembra.png';
+    } else if (sexo.includes('macho')) {
+        return 'Iconos/macho.png';
     } else {
         return 'Iconos/Algarrobo_gris.png';
     }
