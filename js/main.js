@@ -95,23 +95,37 @@ cargarJSON('Datos/datos.json', function(puntos) {
             marker.on('click', () => ampliarImagen(img.src));
         };
     });
-
-    // Mostrar el popup con el recuento y desglose
-    const legendContent = `
-        <div style="text-align:center;">
-            <h3>Total de Árboles: ${totalArboles}</h3>
-            <img src="Iconos/Algarrobo_color.png" alt="Árbol" style="width: 30px; height: 30px;" />
-            <h4>Desglose:</h4>
-            <ul>
-                <li>Injertadas: ${tiposArboles.injertada}</li>
-                <li>Hermafroditas: ${tiposArboles.hermafrodita}</li>
-                <li>Hembras: ${tiposArboles.hembra}</li>
-                <li>Machos: ${tiposArboles.macho}</li>
-                <li>Otros: ${tiposArboles.otros}</li>
-            </ul>
-            <button onclick="closePopup()" style="padding: 5px 10px;">Cerrar</button>
-        </div>
-    `;
+ // Leyenda 
+const legendContent = `
+    <div style="text-align:center;">
+        <h3>Total de Árboles: ${totalArboles}</h3>
+        <img src="Iconos/Algarrobo_color.png" alt="Árbol" style="width: 30px; height: 30px;" />
+        <h4>Desglose:</h4>
+        <ul>
+            <li>
+                Injertadas: ${tiposArboles.injertada}
+                <img src="Iconos/injerto.png" alt="Injerto" style="width: 30px; height: 30px;" />
+            </li>
+            <li>
+                Hermafroditas: ${tiposArboles.hermafrodita}
+                <img src="Iconos/hermafrodita.png" alt="Hermafrodita" style="width: 30px; height: 30px;" />
+            </li>
+            <li>
+                Hembras: ${tiposArboles.hembra}
+                <img src="Iconos/hembra.png" alt="Hembra" style="width: 30px; height: 30px;" />
+            </li>
+            <li>
+                Machos: ${tiposArboles.macho}
+                <img src="Iconos/macho.png" alt="Macho" style="width: 30px; height: 30px;" />
+            </li>
+            <li>
+                Otros: ${tiposArboles.otros}
+                <img src="Iconos/Algarrobo_gris.png" alt="Otro" style="width: 30px; height: 30px;" />
+            </li>
+        </ul>
+        <button onclick="closePopup()" style="padding: 5px 10px;">Cerrar</button>
+    </div>
+`;
 
     // Crear el popup con la leyenda
     const popup = L.popup()
