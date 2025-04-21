@@ -35,9 +35,9 @@ function getIconUrl(punto) {
 
 function getIconSize() {
     if (window.innerWidth < 768) {
-        return [60, 60];
+        return [80, 80]; // Iconos más grandes en móviles
     } else {
-        return [30, 30];
+        return [40, 40]; // Iconos más grandes en ordenador (ajusta según necesites)
     }
 }
 
@@ -100,39 +100,42 @@ cargarJSON('Datos/datos.json', function(puntos) {
         const img = new Image();
         img.src = `Fichas/${punto.imagen}`;
         img.onload = function () {
-            const popupContent = `<img src="${img.src}" alt="Imagen del árbol" style="width: 300px; max-width: 100%;">`;
+            const popupContent = `<img id="popup-image-${punto.id}" src="${img.src}" alt="Imagen del árbol" style="width: 300px; max-width: 100%; cursor: pointer;">`;
             marker.bindPopup(popupContent);
-            marker.on('click', () => ampliarImagen(img.src)); // Asegúrate de que el evento click esté aquí
+            const popupImage = document.getElementById(`popup-image-${punto.id}`);
+            if (popupImage) {
+                popupImage.addEventListener('click', () => ampliarImagen(img.src));
+            }
         };
     });
 
     // Leyenda
     const legendContent = `
-        <div id="legend-popup-content" style="padding: 10px; background-color: white; border: 1px solid #ccc; border-radius: 5px; font-size: 14px; max-width: 90vw;">
+        <div id="legend-popup-content" style="padding: 20px; background-color: white; border: 1px solid #ccc; border-radius: 5px; font-size: 16px; max-width: 90vw; max-height: 80vh; overflow-y: auto;">
             <h4 style="margin-top: 0; text-align: left;">Leyenda</h4>
-            <div style="display: flex; align-items: center; margin-bottom: 5px;">
-                <img src="Iconos/injerto.png" alt="Injertada" style="width: 20px; height: 20px; margin-right: 5px;">
+            <div style="display: flex; align-items: center; margin-bottom: 10px;">
+                <img src="Iconos/injerto.png" alt="Injertada" style="width: 30px; height: 30px; margin-right: 10px;">
                 <span style="text-align: left;">Injertadas: ${tiposArboles.injertada}</span>
             </div>
-            <div style="display: flex; align-items: center; margin-bottom: 5px;">
-                <img src="Iconos/hermafrodita.png" alt="Hermafrodita" style="width: 20px; height: 20px; margin-right: 5px;">
+            <div style="display: flex; align-items: center; margin-bottom: 10px;">
+                <img src="Iconos/hermafrodita.png" alt="Hermafrodita" style="width: 30px; height: 30px; margin-right: 10px;">
                 <span style="text-align: left;">Hermafroditas: ${tiposArboles.hermafrodita}</span>
             </div>
-            <div style="display: flex; align-items: center; margin-bottom: 5px;">
-                <img src="Iconos/hembra.png" alt="Hembra" style="width: 20px; height: 20px; margin-right: 5px;">
+            <div style="display: flex; align-items: center; margin-bottom: 10px;">
+                <img src="Iconos/hembra.png" alt="Hembra" style="width: 30px; height: 30px; margin-right: 10px;">
                 <span style="text-align: left;">Hembras: ${tiposArboles.hembra}</span>
             </div>
-            <div style="display: flex; align-items: center; margin-bottom: 5px;">
-                <img src="Iconos/macho.png" alt="Macho" style="width: 20px; height: 20px; margin-right: 5px;">
+            <div style="display: flex; align-items: center; margin-bottom: 10px;">
+                <img src="Iconos/macho.png" alt="Macho" style="width: 30px; height: 30px; margin-right: 10px;">
                 <span style="text-align: left;">Machos: ${tiposArboles.macho}</span>
             </div>
             <div style="display: flex; align-items: center;">
-                <img src="Iconos/Algarrobo_gris.png" alt="Otros" style="width: 20px; height: 20px; margin-right: 5px;">
+                <img src="Iconos/Algarrobo_gris.png" alt="Otros" style="width: 30px; height: 30px; margin-right: 10px;">
                 <span style="text-align: left;">Otros: ${tiposArboles.otros}</span>
             </div>
-            <hr style="margin-top: 10px; margin-bottom: 5px;">
-            <div style="text-align: left; font-weight: bold;">Total de Árboles: ${totalArboles}</div>
-            <button onclick="mymap.closePopup();" style="padding: 5px 10px; margin-top: 10px;">Cerrar</button>
+            <hr style="margin-top: 15px; margin-bottom: 10px;">
+            <div style="text-align: left; font-weight: bold; font-size: 18px;">Total de Árboles: ${totalArboles}</div>
+            <button onclick="mymap.closePopup();" style="padding: 10px 15px; margin-top: 15px; font-size: 16px;">Cerrar</button>
         </div>
     `;
 
@@ -149,6 +152,8 @@ cargarJSON('Datos/datos.json', function(puntos) {
     const legendPopupElement = legendPopup.getElement();
     if (legendPopupElement) {
         legendPopupElement.style.maxWidth = '90vw'; // O un porcentaje adecuado
+        legendPopupElement.style.maxHeight = '80vh'; // Ajustar altura máxima
+        legendPopupElement.style.overflowY = 'auto'; // Añadir scroll si el contenido es muy largo
     }
 });
 
