@@ -12,23 +12,6 @@ html, body {
     height: 100%;
 }
 
-.emoji-icon {
-    font-size: 24px;
-    filter: grayscale(0%) brightness(100%);
-}
-
-.emoji-macho {
-    filter: hue-rotate(0deg);
-}
-
-.emoji-hembra {
-    filter: hue-rotate(210deg);
-}
-
-.emoji-default {
-    filter: grayscale(80%) brightness(80%);
-}
-
 #img-overlay {
     display: none;
     position: fixed;
@@ -40,6 +23,7 @@ html, body {
     justify-content: center;
     align-items: center;
     z-index: 9999;
+    display: flex;  /* Asegura que se use flexbox */
 }
 
 #img-overlay-content {
@@ -47,4 +31,6 @@ html, body {
     max-height: 90vh;
     border-radius: 10px;
     box-shadow: 0 0 10px #000;
+    object-fit: contain; /* Hace que la imagen se ajuste dentro del contenedor */
 }
+
