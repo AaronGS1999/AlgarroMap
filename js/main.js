@@ -11,7 +11,9 @@ L.tileLayer('https://tile.opentopomap.org/{z}/{x}/{y}.png', {
     maxZoom: 17,
     attribution: 'Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ' +
         '<a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; ' +
-        '<a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)'
+        '<a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)',
+    errorTileUrl: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAAAQCAYAAAB49x6fAAAAHklEQVR42mNgGAWjgP///zDw//8/AyUY0QYAjKkMBV8Y+Z4AAAAASUVORK5CYII=',
+    keepBuffer: 5
 }).addTo(mymap);
 
 function getIconUrl(punto) {
@@ -39,7 +41,7 @@ function getIconSize() {
 }
 
 function getIconAnchor(size) {
-    return [size[0] / 2, size[1] * 0.9]; // Calcula el ancla dinámicamente
+    return [size[0] / 2, size[1] * 0.9];
 }
 
 cargarJSON('Datos/datos.json', function(puntos) {
@@ -74,7 +76,3 @@ function ampliarImagen(src) {
     overlayImg.src = src;
     overlay.style.display = 'flex';
 }
-
-document.getElementById('img-overlay').addEventListener('click', function () {
-    this.style.display = 'none';
-});
