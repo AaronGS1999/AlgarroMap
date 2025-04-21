@@ -34,7 +34,7 @@ function getIconSize() {
     if (window.innerWidth < 768) {
         return [80, 80]; 
     } else {
-        return [100, 100]; 
+        return [80, 80]; 
     }
 }
 
