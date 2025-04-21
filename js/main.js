@@ -35,9 +35,9 @@ function getIconUrl(punto) {
 
 function getIconSize() {
     if (window.innerWidth < 768) {
-        return [80, 80]; 
+        return [80, 80];
     } else {
-        return [100, 100]; 
+        return [100, 100];
     }
 }
 
@@ -103,55 +103,56 @@ puntos.forEach(punto => {
     };
 });
 
-// Leyenda
+// Contenido de la leyenda
 const legendContent = `
-    <div id="legend-popup-content" style="padding: 20px; background-color: white; border: 1px solid #ccc; border-radius: 5px; font-size: 16px; max-width: calc(100vw - 40px); max-height: 85vh; overflow-y: auto;">
-        <h4 style="margin-top: 0; text-align: left;">Leyenda</h4>
-        <div style="display: flex; align-items: center; margin-bottom: 10px;">
-            <img src="Iconos/injerto.png" alt="Injertada" style="width: 50px; height: 50px; margin-right: 10px;">
-            <span style="text-align: left;">Injertadas: ${tiposArboles.injertada}</span>
+    <div id="legend-popup-content" style="padding: 20px; background-color: white; border: 1px solid #ccc; border-radius: 5px; font-size: 16px; max-width: 300px; max-height: 400px; overflow-y: auto; text-align: center;">
+        <h4 style="margin-top: 0;">Leyenda</h4>
+        <div style="display: flex; align-items: center; margin-bottom: 10px; justify-content: flex-start;">
+            <img src="Iconos/injerto.png" alt="Injertada" style="width: 30px; height: 30px; margin-right: 10px;">
+            <span>Injertadas: ${tiposArboles.injertada}</span>
         </div>
-        <div style="display: flex; align-items: center; margin-bottom: 10px;">
-            <img src="Iconos/hermafrodita.png" alt="Hermafrodita" style="width: 50px; height: 50px; margin-right: 10px;">
-            <span style="text-align: left;">Hermafroditas: ${tiposArboles.hermafrodita}</span>
+        <div style="display: flex; align-items: center; margin-bottom: 10px; justify-content: flex-start;">
+            <img src="Iconos/hermafrodita.png" alt="Hermafrodita" style="width: 30px; height: 30px; margin-right: 10px;">
+            <span>Hermafroditas: ${tiposArboles.hermafrodita}</span>
         </div>
-        <div style="display: flex; align-items: center; margin-bottom: 10px;">
-            <img src="Iconos/hembra.png" alt="Hembra" style="width: 50px; height: 50px; margin-right: 10px;">
-            <span style="text-align: left;">Hembras: ${tiposArboles.hembra}</span>
+        <div style="display: flex; align-items: center; margin-bottom: 10px; justify-content: flex-start;">
+            <img src="Iconos/hembra.png" alt="Hembra" style="width: 30px; height: 30px; margin-right: 10px;">
+            <span>Hembras: ${tiposArboles.hembra}</span>
         </div>
-        <div style="display: flex; align-items: center; margin-bottom: 10px;">
-            <img src="Iconos/macho.png" alt="Macho" style="width: 50px; height: 50px; margin-right: 10px;">
-            <span style="text-align: left;">Machos: ${tiposArboles.macho}</span>
+        <div style="display: flex; align-items: center; margin-bottom: 10px; justify-content: flex-start;">
+            <img src="Iconos/macho.png" alt="Macho" style="width: 30px; height: 30px; margin-right: 10px;">
+            <span>Machos: ${tiposArboles.macho}</span>
         </div>
-        <div style="display: flex; align-items: center;">
-            <img src="Iconos/Algarrobo_gris.png" alt="Otros" style="width: 50px; height: 50px; margin-right: 10px;">
-            <span style="text-align: left;">Otros: ${tiposArboles.otros}</span>
+        <div style="display: flex; align-items: center; justify-content: flex-start;">
+            <img src="Iconos/Algarrobo_gris.png" alt="Otros" style="width: 30px; height: 30px; margin-right: 10px;">
+            <span>Otros: ${tiposArboles.otros}</span>
         </div>
         <hr style="margin-top: 15px; margin-bottom: 10px;">
-        <div style="display: flex; align-items: center; text-align: left;">
-            <img src="Iconos/Algarrobo_color.png" alt="Total de árboles" style="width: 50px; height: 50px; margin-right: 10px;">
-            <span>Total de Árboles: ${totalArboles}</span>
+        <div style="display: flex; align-items: center; justify-content: flex-start;">
+            <img src="Iconos/Algarrobo_color.png" alt="Total de árboles" style="width: 30px; height: 30px; margin-right: 10px;">
+            <span>Total de árboles: ${totalArboles}</span>
+        </div>
+        <hr style="margin-top: 15px; margin-bottom: 10px;">
+        <div style="text-align: center;">
+            <a href="https://camo.githubusercontent.com/6deb5b914b847e507d4e52afc98807f9745dc2c992d7f7497775c84d951247da/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f5765622d416c676172726f4d61702d6f72616e6765" target="_blank" style="text-decoration: none; color: blue;">Link al repositorio</a>
         </div>
     </div>
 `;
 
+    // Crear un contenedor div para la leyenda y añadirlo al mapa como control
+    const legendContainer = L.DomUtil.create('div', 'legend');
+    legendContainer.innerHTML = legendContent;
 
+    const legendControl = L.control({position: 'center'});
+    legendControl.onAdd = function (map) {
+        return legendContainer;
+    };
+    legendControl.addTo(mymap);
 
-    // Crear el popup de la leyenda y abrirlo en el mapa
-    const legendPopup = L.popup({
-        closeOnClick: false, // Para que no se cierre al hacer clic fuera
-        autoClose: false     // Para que no se cierre automáticamente
-    })
-    .setLatLng(mymap.getCenter()) // Centrar el popup en la vista inicial
-    .setContent(legendContent)
-    .openOn(mymap);
-
-    // Ajustar el tamaño máximo del popup de leyenda
-    const legendPopupElement = legendPopup.getElement();
+    // Estilos CSS adicionales para centrar el popup y evitar la barra de scroll
+    const legendPopupElement = legendContainer;
     if (legendPopupElement) {
-        legendPopupElement.style.maxWidth = '90vw'; // O un porcentaje adecuado
-        legendPopupElement.style.maxHeight = '80vh'; // Ajustar altura máxima
-        legendPopupElement.style.overflowY = 'auto'; // Añadir scroll si el contenido es muy largo
+        legendPopupElement.style.pointerEvents = 'auto'; // Asegura que los clicks dentro del popup funcionen
     }
 });
 
