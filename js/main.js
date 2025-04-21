@@ -64,80 +64,78 @@ cargarJSON('Datos/datos.json', function(puntos) {
         otros: 0
     };
 
-    puntos.forEach(punto => {
-        const lat = punto.latitud / 1000000;
-        const lon = punto.longitud / 1000000;
-        const iconUrl = getIconUrl(punto);
+puntos.forEach(punto => {
+    const lat = punto.latitud / 1000000;
+    const lon = punto.longitud / 1000000;
+    const iconUrl = getIconUrl(punto);
 
-        const size = getIconSize();
-        const anchor = getIconAnchor(size);
+    const size = getIconSize();
+    const anchor = getIconAnchor(size);
 
-        const customIcon = L.icon({
-            iconUrl: iconUrl,
-            iconSize: size,
-            iconAnchor: anchor,
-            popupAnchor: [0, -anchor[1]]
-        });
-
-        const marker = L.marker([lat, lon], { icon: customIcon }).addTo(mymap);
-
-        // Actualización de recuento total y desglose por tipo
-        totalArboles++;
-
-        if (punto.injertada && punto.injertada.toLowerCase() === 'si') {
-            tiposArboles.injertada++;
-        } else if (punto.Sexo && punto.Sexo.toLowerCase().includes('hermafrodita')) {
-            tiposArboles.hermafrodita++;
-        } else if (punto.Sexo && punto.Sexo.toLowerCase().includes('hembra')) {
-            tiposArboles.hembra++;
-        } else if (punto.Sexo && punto.Sexo.toLowerCase().includes('macho')) {
-            tiposArboles.macho++;
-        } else {
-            tiposArboles.otros++;
-        }
-
-        // Mostrar imagen en el popup al hacer clic en el marcador
-        const img = new Image();
-        img.src = `Fichas/${punto.imagen}`;
-        img.onload = function () {
-            const popupContent = `<img id="popup-image-${punto.id}" src="${img.src}" alt="Imagen del árbol" style="width: 300px; max-width: 100%; cursor: pointer;">`;
-            marker.bindPopup(popupContent);
-            const popupImage = document.getElementById(`popup-image-${punto.id}`);
-            if (popupImage) {
-                popupImage.addEventListener('click', () => ampliarImagen(img.src));
-            }
-        };
+    const customIcon = L.icon({
+        iconUrl: iconUrl,
+        iconSize: size,
+        iconAnchor: anchor,
+        popupAnchor: [0, -anchor[1]]
     });
 
-    // Leyenda
-    const legendContent = `
-        <div id="legend-popup-content" style="padding: 20px; background-color: white; border: 1px solid #ccc; border-radius: 5px; font-size: 16px; max-width: 90vw; max-height: 80vh; overflow-y: auto;">
-            <h4 style="margin-top: 0; text-align: left;">Leyenda</h4>
-            <div style="display: flex; align-items: center; margin-bottom: 10px;">
-                <img src="Iconos/injerto.png" alt="Injertada" style="width: 50px; height: 50px; margin-right: 10px;">
-                <span style="text-align: left;">Injertadas: ${tiposArboles.injertada}</span>
-            </div>
-            <div style="display: flex; align-items: center; margin-bottom: 10px;">
-                <img src="Iconos/hermafrodita.png" alt="Hermafrodita" style="width: 50px; height: 50px; margin-right: 10px;">
-                <span style="text-align: left;">Hermafroditas: ${tiposArboles.hermafrodita}</span>
-            </div>
-            <div style="display: flex; align-items: center; margin-bottom: 10px;">
-                <img src="Iconos/hembra.png" alt="Hembra" style="width: 50px; height: 50px; margin-right: 10px;">
-                <span style="text-align: left;">Hembras: ${tiposArboles.hembra}</span>
-            </div>
-            <div style="display: flex; align-items: center; margin-bottom: 10px;">
-                <img src="Iconos/macho.png" alt="Macho" style="width: 50px; height: 50px; margin-right: 10px;">
-                <span style="text-align: left;">Machos: ${tiposArboles.macho}</span>
-            </div>
-            <div style="display: flex; align-items: center;">
-                <img src="Iconos/Algarrobo_gris.png" alt="Otros" style="width: 50px; height: 50px; margin-right: 10px;">
-                <span style="text-align: left;">Otros: ${tiposArboles.otros}</span>
-            </div>
-            <hr style="margin-top: 15px; margin-bottom: 10px;">
-            <div style="text-align: left; font-weight: bold; font-size: 18px;">Total de Árboles: ${totalArboles}</div>
-            <button onclick="mymap.closePopup();" style="padding: 10px 15px; margin-top: 15px; font-size: 16px;">Cerrar</button>
+    const marker = L.marker([lat, lon], { icon: customIcon }).addTo(mymap);
+
+    totalArboles++;
+
+    if (punto.injertada && punto.injertada.toLowerCase() === 'si') {
+        tiposArboles.injertada++;
+    } else if (punto.Sexo && punto.Sexo.toLowerCase().includes('hermafrodita')) {
+        tiposArboles.hermafrodita++;
+    } else if (punto.Sexo && punto.Sexo.toLowerCase().includes('hembra')) {
+        tiposArboles.hembra++;
+    } else if (punto.Sexo && punto.Sexo.toLowerCase().includes('macho')) {
+        tiposArboles.macho++;
+    } else {
+        tiposArboles.otros++;
+    }
+
+    // Mostrar directamente la imagen ampliada al hacer clic, sin popup
+    const img = new Image();
+    img.src = `Fichas/${punto.imagen}`;
+    img.onload = function () {
+        marker.on('click', () => ampliarImagen(img.src));
+    };
+});
+
+// Leyenda
+const legendContent = `
+    <div id="legend-popup-content" style="padding: 20px; background-color: white; border: 1px solid #ccc; border-radius: 5px; font-size: 16px; max-width: 90vw; max-height: 80vh; overflow-y: auto;">
+        <h4 style="margin-top: 0; text-align: left;">Leyenda</h4>
+        <div style="display: flex; align-items: center; margin-bottom: 10px;">
+            <img src="Iconos/injerto.png" alt="Injertada" style="width: 50px; height: 50px; margin-right: 10px;">
+            <span style="text-align: left;">Injertadas: ${tiposArboles.injertada}</span>
         </div>
-    `;
+        <div style="display: flex; align-items: center; margin-bottom: 10px;">
+            <img src="Iconos/hermafrodita.png" alt="Hermafrodita" style="width: 50px; height: 50px; margin-right: 10px;">
+            <span style="text-align: left;">Hermafroditas: ${tiposArboles.hermafrodita}</span>
+        </div>
+        <div style="display: flex; align-items: center; margin-bottom: 10px;">
+            <img src="Iconos/hembra.png" alt="Hembra" style="width: 50px; height: 50px; margin-right: 10px;">
+            <span style="text-align: left;">Hembras: ${tiposArboles.hembra}</span>
+        </div>
+        <div style="display: flex; align-items: center; margin-bottom: 10px;">
+            <img src="Iconos/macho.png" alt="Macho" style="width: 50px; height: 50px; margin-right: 10px;">
+            <span style="text-align: left;">Machos: ${tiposArboles.macho}</span>
+        </div>
+        <div style="display: flex; align-items: center;">
+            <img src="Iconos/Algarrobo_gris.png" alt="Otros" style="width: 50px; height: 50px; margin-right: 10px;">
+            <span style="text-align: left;">Otros: ${tiposArboles.otros}</span>
+        </div>
+        <hr style="margin-top: 15px; margin-bottom: 10px;">
+        <div style="display: flex; align-items: center; text-align: left; font-weight: bold; font-size: 18px;">
+            <img src="Iconos/Algarrobo_color.png" alt="Total Árboles" style="width: 50px; height: 50px; margin-right: 10px;">
+            <span>Total de Árboles: ${totalArboles}</span>
+        </div>
+        <button onclick="mymap.closePopup();" style="padding: 10px 15px; margin-top: 15px; font-size: 16px;">Cerrar</button>
+    </div>
+`;
+
 
     // Crear el popup de la leyenda y abrirlo en el mapa
     const legendPopup = L.popup({
