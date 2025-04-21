@@ -105,7 +105,7 @@ cargarJSON('Datos/datos.json', function(puntos) {
 
     // Contenido de la leyenda
     const legendContent = `
-        <div id="legend-popup-content" style="padding: 20px; background-color: white; border: 1px solid #ccc; border-radius: 5px; font-size: 16px; max-width: 350px; max-height: 450px; overflow-y: auto; text-align: center;">
+        <div id="legend-popup-content" style="padding: 20px; background-color: white; border: 1px solid #ccc; border-radius: 5px; font-size: 16px; max-width: 375px; max-height: 475px; overflow-y: auto; text-align: center;">
             <h4 style="margin-top: 0;">Leyenda</h4>
             <button id="close-legend" style="position: absolute; top: 10px; right: 10px; border: none; background: none; font-size: 16px; cursor: pointer;">&times;</button>
             <div style="display: flex; align-items: center; margin-bottom: 15px; justify-content: flex-start;">
