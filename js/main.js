@@ -10,8 +10,8 @@ const mymap = L.map('mapid').setView([36.93, -1.99], 13);
 L.tileLayer('https://tile.opentopomap.org/{z}/{x}/{y}.png', {
     maxZoom: 17,
     attribution: 'Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ' +
-                 '<a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; ' +
-                 '<a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)'
+        '<a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; ' +
+        '<a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)'
 }).addTo(mymap);
 
 function getIconUrl(punto) {
@@ -30,17 +30,32 @@ function getIconUrl(punto) {
     }
 }
 
+function getIconSize() {
+    if (window.innerWidth < 768) {
+        return [80, 80]; // Tamaño para móviles
+    } else {
+        return [120, 120]; // Tamaño para escritorio
+    }
+}
+
+function getIconAnchor(size) {
+    return [size[0] / 2, size[1] * 0.9]; // Calcula el ancla dinámicamente
+}
+
 cargarJSON('Datos/datos.json', function(puntos) {
     puntos.forEach(punto => {
         const lat = punto.latitud / 1000000;
         const lon = punto.longitud / 1000000;
         const iconUrl = getIconUrl(punto);
 
+        const size = getIconSize();
+        const anchor = getIconAnchor(size);
+
         const customIcon = L.icon({
             iconUrl: iconUrl,
-            iconSize: [80, 80],
-            iconAnchor: [45, 70],
-            popupAnchor: [0, -80]
+            iconSize: size,
+            iconAnchor: anchor,
+            popupAnchor: [0, -anchor[1]]
         });
 
         const marker = L.marker([lat, lon], { icon: customIcon }).addTo(mymap);
