@@ -77,7 +77,56 @@
       "imagen": "VicarI.png",
       "Sexo": "Hembra",
       "injertada": "si"
-    }
+    },
+    {
+  "id": 11,
+  "latitud": 36819800,
+  "longitud": -2652900,
+  "imagen": "VicarM1.png",
+  "Sexo": "Macho",
+  "injertada": "no"
+},
+{
+  "id": 12,
+  "latitud": 36819750,
+  "longitud": -2652750,
+  "imagen": "VicarM2.png",
+  "Sexo": "Macho",
+  "injertada": "si"
+},
+{
+  "id": 13,
+  "latitud": 36820020,
+  "longitud": -2652600,
+  "imagen": "VicarM3.png",
+  "Sexo": "Macho",
+  "injertada": "no"
+},
+{
+  "id": 14,
+  "latitud": 36819990,
+  "longitud": -2652950,
+  "imagen": "VicarH1.png",
+  "Sexo": "Hermafrodita",
+  "injertada": "si"
+},
+{
+  "id": 15,
+  "latitud": 36820110,
+  "longitud": -2652800,
+  "imagen": "VicarH2.png",
+  "Sexo": "Hermafrodita, posiblemente hembra",
+  "injertada": "no"
+},
+{
+  "id": 16,
+  "latitud": 36820200,
+  "longitud": -2652700,
+  "imagen": "VicarH3.png",
+  "Sexo": "Hermafrodita",
+  "injertada": "no"
+}
+
 ]
 
 
