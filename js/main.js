@@ -45,6 +45,14 @@ function getIconAnchor(size) {
     return [size[0] / 2, size[1]];
 }
 
+// Ocultar la capa de la imagen ampliada al inicio
+document.addEventListener('DOMContentLoaded', function() {
+    const overlay = document.getElementById('img-overlay');
+    if (overlay) {
+        overlay.style.display = 'none';
+    }
+});
+
 // Cargar los datos y agregar marcadores
 cargarJSON('Datos/datos.json', function(puntos) {
     let totalArboles = 0;
@@ -94,6 +102,7 @@ cargarJSON('Datos/datos.json', function(puntos) {
         img.onload = function () {
             const popupContent = `<img src="${img.src}" alt="Imagen del árbol" style="width: 300px; max-width: 100%;">`;
             marker.bindPopup(popupContent);
+            marker.on('click', () => ampliarImagen(img.src)); // Asegúrate de que el evento click esté aquí
         };
     });
 
@@ -149,3 +158,8 @@ function ampliarImagen(src) {
     overlayImg.src = src;
     overlay.style.display = 'flex';
 }
+
+// Asegúrate de que la función para ocultar la imagen ampliada exista y esté conectada al overlay
+document.getElementById('img-overlay').addEventListener('click', function() {
+    this.style.display = 'none';
+});
