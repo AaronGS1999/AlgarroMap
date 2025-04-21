@@ -14,27 +14,34 @@ L.tileLayer('https://tile.opentopomap.org/{z}/{x}/{y}.png', {
                  '<a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)'
 }).addTo(mymap);
 
-function getEmojiClass(sexo) {
-    if (sexo && sexo.toLowerCase() === 'macho') return 'emoji-icon emoji-macho';
-    if (sexo && sexo.toLowerCase() === 'hembra') return 'emoji-icon emoji-hembra';
-    return 'emoji-icon emoji-default';
+function getIconUrl(punto) {
+    if (punto.injertada && punto.injertada.toLowerCase() === 'si') {
+        return 'Iconos/injerto.png';
+    } else if (punto.Sexo && punto.Sexo.toLowerCase().includes('hembra')) {
+        return 'Iconos/hembra.png';
+    } else if (punto.Sexo && punto.Sexo.toLowerCase() === 'macho') {
+        return 'Iconos/macho.png';
+    } else if (punto.Sexo && punto.Sexo.toLowerCase().includes('hermafrodita')) {
+        return 'Iconos/hermafrodita.png';
+    } else {
+        return 'Iconos/Algarrobo_gris.png';
+    }
 }
 
 cargarJSON('Datos/datos.json', function(puntos) {
     puntos.forEach(punto => {
         const lat = punto.latitud / 1000000;
         const lon = punto.longitud / 1000000;
-        const emojiClass = getEmojiClass(punto.Sexo);
+        const iconUrl = getIconUrl(punto);
 
-        const icon = L.divIcon({
-            html: `<div class="${emojiClass}" title="ID: ${punto.id}">🌳</div>`,
-            className: '',
+        const customIcon = L.icon({
+            iconUrl: iconUrl,
             iconSize: [30, 30],
             iconAnchor: [15, 30],
             popupAnchor: [0, -30]
         });
 
-        const marker = L.marker([lat, lon], { icon: icon }).addTo(mymap);
+        const marker = L.marker([lat, lon], { icon: customIcon }).addTo(mymap);
 
         const img = new Image();
         img.src = `Fichas/${punto.imagen}`;
