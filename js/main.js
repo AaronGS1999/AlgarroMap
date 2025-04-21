@@ -114,23 +114,23 @@ cargarJSON('Datos/datos.json', function(puntos) {
         <div id="legend-popup-content" style="padding: 20px; background-color: white; border: 1px solid #ccc; border-radius: 5px; font-size: 16px; max-width: 90vw; max-height: 80vh; overflow-y: auto;">
             <h4 style="margin-top: 0; text-align: left;">Leyenda</h4>
             <div style="display: flex; align-items: center; margin-bottom: 10px;">
-                <img src="Iconos/injerto.png" alt="Injertada" style="width: 30px; height: 30px; margin-right: 10px;">
+                <img src="Iconos/injerto.png" alt="Injertada" style="width: 50px; height: 50px; margin-right: 10px;">
                 <span style="text-align: left;">Injertadas: ${tiposArboles.injertada}</span>
             </div>
             <div style="display: flex; align-items: center; margin-bottom: 10px;">
-                <img src="Iconos/hermafrodita.png" alt="Hermafrodita" style="width: 30px; height: 30px; margin-right: 10px;">
+                <img src="Iconos/hermafrodita.png" alt="Hermafrodita" style="width: 50px; height: 50px; margin-right: 10px;">
                 <span style="text-align: left;">Hermafroditas: ${tiposArboles.hermafrodita}</span>
             </div>
             <div style="display: flex; align-items: center; margin-bottom: 10px;">
-                <img src="Iconos/hembra.png" alt="Hembra" style="width: 30px; height: 30px; margin-right: 10px;">
+                <img src="Iconos/hembra.png" alt="Hembra" style="width: 50px; height: 50px; margin-right: 10px;">
                 <span style="text-align: left;">Hembras: ${tiposArboles.hembra}</span>
             </div>
             <div style="display: flex; align-items: center; margin-bottom: 10px;">
-                <img src="Iconos/macho.png" alt="Macho" style="width: 30px; height: 30px; margin-right: 10px;">
+                <img src="Iconos/macho.png" alt="Macho" style="width: 50px; height: 50px; margin-right: 10px;">
                 <span style="text-align: left;">Machos: ${tiposArboles.macho}</span>
             </div>
             <div style="display: flex; align-items: center;">
-                <img src="Iconos/Algarrobo_gris.png" alt="Otros" style="width: 30px; height: 30px; margin-right: 10px;">
+                <img src="Iconos/Algarrobo_gris.png" alt="Otros" style="width: 50px; height: 50px; margin-right: 10px;">
                 <span style="text-align: left;">Otros: ${tiposArboles.otros}</span>
             </div>
             <hr style="margin-top: 15px; margin-bottom: 10px;">
@@ -162,9 +162,13 @@ function ampliarImagen(src) {
     const overlayImg = document.getElementById('img-overlay-content');
     overlayImg.src = src;
     overlay.style.display = 'flex';
+
+    // Cierra cualquier popup abierto al ampliar la imagen
+    mymap.closePopup();
 }
 
-// Asegúrate de que la función para ocultar la imagen ampliada exista y esté conectada al overlay
-document.getElementById('img-overlay').addEventListener('click', function() {
+// Cerrar imagen ampliada y también cualquier popup abierto
+document.getElementById('img-overlay').addEventListener('click', function () {
     this.style.display = 'none';
+    mymap.closePopup(); // Cierra posibles popups residuales
 });
