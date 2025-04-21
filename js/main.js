@@ -107,6 +107,7 @@ cargarJSON('Datos/datos.json', function(puntos) {
     const legendContent = `
         <div id="legend-popup-content" style="padding: 20px; background-color: white; border: 1px solid #ccc; border-radius: 5px; font-size: 16px; max-width: 300px; max-height: 400px; overflow-y: auto; text-align: center;">
             <h4 style="margin-top: 0;">Leyenda</h4>
+            <button id="close-legend" style="position: absolute; top: 10px; right: 10px; border: none; background: none; font-size: 16px; cursor: pointer;">&times;</button>
             <div style="display: flex; align-items: center; margin-bottom: 10px; justify-content: flex-start;">
                 <img src="Iconos/injerto.png" alt="Injertada" style="width: 30px; height: 30px; margin-right: 10px;">
                 <span>Injertadas: ${tiposArboles.injertada}</span>
@@ -134,7 +135,7 @@ cargarJSON('Datos/datos.json', function(puntos) {
             </div>
             <hr style="margin-top: 15px; margin-bottom: 10px;">
             <div style="text-align: center;">
-                <a href="https://camo.githubusercontent.com/6deb5b914b847e507d4e52afc98807f9745dc2c992d7f7497775c84d951247da/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f5765622d416c676172726f4d61702d6f72616e6765" target="_blank" style="text-decoration: none; color: blue;">Link al repositorio</a>
+                <a href="https://github.com/AaronGS1999/AlgarroMap" target="_blank" style="text-decoration: none; color: blue;">Link al repositorio</a>
             </div>
         </div>
     `;
@@ -159,6 +160,15 @@ cargarJSON('Datos/datos.json', function(puntos) {
     legendDiv.style.maxHeight = '80vh';
     legendDiv.style.overflowY = 'auto';
     legendDiv.style.textAlign = 'center';
+
+    // Añadir evento para cerrar la leyenda
+    const closeButton = document.getElementById('close-legend');
+    closeButton.addEventListener('click', function() {
+        const legendContainer = document.getElementById('legend-container');
+        if (legendContainer) {
+            legendContainer.style.display = 'none';
+        }
+    });
 });
 
 function ampliarImagen(src) {
