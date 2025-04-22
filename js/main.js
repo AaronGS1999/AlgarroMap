@@ -163,8 +163,8 @@ cargarJSON('Datos/datos.json', function(puntos) {
     legendDiv.style.borderRadius = '5px';
     legendDiv.style.padding = '20px';
     legendDiv.style.zIndex = '1000'; 
-    legendDiv.style.maxWidth = '90vw';
-    legendDiv.style.maxHeight = '80vh';
+    legendDiv.style.maxWidth = '95vw';
+    legendDiv.style.maxHeight = '85vh';
     legendDiv.style.overflowY = 'auto';
     legendDiv.style.textAlign = 'center';
 
