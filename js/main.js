@@ -153,7 +153,7 @@ cargarJSON('Datos/datos.json', function(puntos) {
         <div style="display: flex; align-items: center; justify-content: flex-start;">
             <img src="Iconos/Algarrobo_color.png" alt="Total" style="width: 55px; height: 55px; margin-right: 10px;">
             <div style="display: flex; flex-direction: column; align-items: flex-start;">
-                <span>Total de árboles</span>
+                <span>Total</span>
                 <span style="font-weight: bold;">${totalArboles}</span>
             </div>
         </div>
