@@ -110,42 +110,59 @@ cargarJSON('Datos/datos.json', function(puntos) {
         };
     });
 
-    // Ventana de la leyenda
     const legendContent = `
-        <div id="legend-popup-content" style="padding: 20px; background-color: white; border: 1px solid #ccc; border-radius: 5px; font-size: 12px; max-width: 450px; max-height: 650px; overflow-y: auto; text-align: center;">
-            <h4 style="margin-top: 0;">Leyenda</h4>
-            <button id="close-legend" style="position: absolute; top: 1px; right: 1px; border: none; background: none; font-size: 18px; cursor: pointer;">&times;</button>
-            <div style="display: flex; align-items: center; margin-bottom: 15px; justify-content: flex-start;">
-                <img src="Iconos/injerto.png" alt="Injertada" style="width: 55px; height: 55px; margin-right: 5px;">
-                <span>Injertadas: ${tiposArboles.injertada}</span>
-            </div>
-            <div style="display: flex; align-items: center; margin-bottom: 15px; justify-content: flex-start;">
-                <img src="Iconos/hermafrodita.png" alt="Hermafrodita" style="width: 55px; height: 55px; margin-right: 5px;">
-                <span>Hermafroditas: ${tiposArboles.hermafrodita}</span>
-            </div>
-            <div style="display: flex; align-items: center; margin-bottom: 15px; justify-content: flex-start;">
-                <img src="Iconos/hembra.png" alt="Hembra" style="width: 55px; height: 55px; margin-right: 5px;">
-                <span>Hembras: ${tiposArboles.hembra}</span>
-            </div>
-            <div style="display: flex; align-items: center; margin-bottom: 15px; justify-content: flex-start;">
-                <img src="Iconos/macho.png" alt="Macho" style="width: 55px; height: 55px; margin-right: 5px;">
-                <span>Machos: ${tiposArboles.macho}</span>
-            </div>
-            <div style="display: flex; align-items: center; justify-content: flex-start;">
-                <img src="Iconos/Algarrobo_gris.png" alt="Otros" style="width: 55px; height: 55px; margin-right: 5px;">
-                <span>Otros: ${tiposArboles.otros}</span>
-            </div>
-            <hr style="margin-top: 20px; margin-bottom: 15px;">
-            <div style="display: flex; align-items: center; justify-content: flex-start;">
-                <img src="Iconos/Algarrobo_color.png" alt="Total de árboles" style="width: 55px; height: 55px; margin-right: 5px;">
-                <span>Total de árboles: ${totalArboles}</span>
-            </div>
-            <hr style="margin-top: 20px; margin-bottom: 15px;">
-            <div style="text-align: center;">
-                <a href="https://github.com/AaronGS1999/AlgarroMap" target="_blank" style="text-decoration: none; color: blue;">Link al repositorio</a>
+    <div id="legend-popup-content" style="padding: 15px; background-color: white; border: 1px solid #ccc; border-radius: 5px; font-size: 12px; max-width: 450px; max-height: 650px; overflow-y: auto; text-align: center;">
+        <h4 style="margin-top: 0; margin-bottom: 10px;">Leyenda</h4>
+        <button id="close-legend" style="position: absolute; top: 1px; right: 1px; border: none; background: none; font-size: 18px; cursor: pointer;">&times;</button>
+        <div style="display: flex; align-items: center; margin-bottom: 10px; justify-content: flex-start;">
+            <img src="Iconos/injerto.png" alt="Injertada" style="width: 55px; height: 55px; margin-right: 10px;">
+            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                <span>Injertadas</span>
+                <span style="font-weight: bold;">${tiposArboles.injertada}</span>
             </div>
         </div>
-    `;
+        <div style="display: flex; align-items: center; margin-bottom: 10px; justify-content: flex-start;">
+            <img src="Iconos/hermafrodita.png" alt="Hermafrodita" style="width: 55px; height: 55px; margin-right: 10px;">
+            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                <span>Hermafroditas</span>
+                <span style="font-weight: bold;">${tiposArboles.hermafrodita}</span>
+            </div>
+        </div>
+        <div style="display: flex; align-items: center; margin-bottom: 10px; justify-content: flex-start;">
+            <img src="Iconos/hembra.png" alt="Hembra" style="width: 55px; height: 55px; margin-right: 10px;">
+            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                <span>Hembras</span>
+                <span style="font-weight: bold;">${tiposArboles.hembra}</span>
+            </div>
+        </div>
+        <div style="display: flex; align-items: center; margin-bottom: 10px; justify-content: flex-start;">
+            <img src="Iconos/macho.png" alt="Macho" style="width: 55px; height: 55px; margin-right: 10px;">
+            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                <span>Machos</span>
+                <span style="font-weight: bold;">${tiposArboles.macho}</span>
+            </div>
+        </div>
+        <div style="display: flex; align-items: center; justify-content: flex-start;">
+            <img src="Iconos/Algarrobo_gris.png" alt="Otros" style="width: 55px; height: 55px; margin-right: 10px;">
+            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                <span>Otros</span>
+                <span style="font-weight: bold;">${tiposArboles.otros}</span>
+            </div>
+        </div>
+        <hr style="margin-top: 15px; margin-bottom: 10px;">
+        <div style="display: flex; align-items: center; justify-content: flex-start;">
+            <img src="Iconos/Algarrobo_color.png" alt="Total de árboles" style="width: 55px; height: 55px; margin-right: 10px;">
+            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                <span>Total de árboles</span>
+                <span style="font-weight: bold;">${totalArboles}</span>
+            </div>
+        </div>
+        <hr style="margin-top: 15px; margin-bottom: 10px;">
+        <div style="text-align: center;">
+            <a href="https://github.com/AaronGS1999/AlgarroMap" target="_blank" style="text-decoration: none; color: blue; font-size: 14px;">Link al repositorio</a>
+        </div>
+    </div>
+`;
 
     // div leyenda
     const legendDiv = document.createElement('div');
