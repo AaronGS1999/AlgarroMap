@@ -116,28 +116,28 @@ cargarJSON('Datos/datos.json', function(puntos) {
             <h4 style="margin-top: 0;">Leyenda</h4>
             <button id="close-legend" style="position: absolute; top: 1px; right: 1px; border: none; background: none; font-size: 18px; cursor: pointer;">&times;</button>
             <div style="display: flex; align-items: center; margin-bottom: 15px; justify-content: flex-start;">
-                <img src="Iconos/injerto.png" alt="Injertada" style="width: 60px; height: 60px; margin-right: 10px;">
+                <img src="Iconos/injerto.png" alt="Injertada" style="width: 55px; height: 55px; margin-right: 5px;">
                 <span>Injertadas: ${tiposArboles.injertada}</span>
             </div>
             <div style="display: flex; align-items: center; margin-bottom: 15px; justify-content: flex-start;">
-                <img src="Iconos/hermafrodita.png" alt="Hermafrodita" style="width: 60px; height: 60px; margin-right: 10px;">
+                <img src="Iconos/hermafrodita.png" alt="Hermafrodita" style="width: 55px; height: 55px; margin-right: 5px;">
                 <span>Hermafroditas: ${tiposArboles.hermafrodita}</span>
             </div>
             <div style="display: flex; align-items: center; margin-bottom: 15px; justify-content: flex-start;">
-                <img src="Iconos/hembra.png" alt="Hembra" style="width: 60px; height: 60px; margin-right: 10px;">
+                <img src="Iconos/hembra.png" alt="Hembra" style="width: 55px; height: 55px; margin-right: 5px;">
                 <span>Hembras: ${tiposArboles.hembra}</span>
             </div>
             <div style="display: flex; align-items: center; margin-bottom: 15px; justify-content: flex-start;">
-                <img src="Iconos/macho.png" alt="Macho" style="width: 60px; height: 60px; margin-right: 10px;">
+                <img src="Iconos/macho.png" alt="Macho" style="width: 55px; height: 55px; margin-right: 5px;">
                 <span>Machos: ${tiposArboles.macho}</span>
             </div>
             <div style="display: flex; align-items: center; justify-content: flex-start;">
-                <img src="Iconos/Algarrobo_gris.png" alt="Otros" style="width: 60px; height: 60px; margin-right: 10px;">
+                <img src="Iconos/Algarrobo_gris.png" alt="Otros" style="width: 55px; height: 55px; margin-right: 5px;">
                 <span>Otros: ${tiposArboles.otros}</span>
             </div>
             <hr style="margin-top: 20px; margin-bottom: 15px;">
             <div style="display: flex; align-items: center; justify-content: flex-start;">
-                <img src="Iconos/Algarrobo_color.png" alt="Total de árboles" style="width: 60px; height: 60px; margin-right: 10px;">
+                <img src="Iconos/Algarrobo_color.png" alt="Total de árboles" style="width: 55px; height: 55px; margin-right: 5px;">
                 <span>Total de árboles: ${totalArboles}</span>
             </div>
             <hr style="margin-top: 20px; margin-bottom: 15px;">
