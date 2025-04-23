@@ -17,25 +17,26 @@ L.tileLayer('https://tile.opentopomap.org/{z}/{x}/{y}.png', {
     errorTileUrl: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAAAQCAYAAAB49x6fAAAAHklEQVR42mNgGAWjgP///zDw//8/AyUY0QYAjKkMBV8Y+Z4AAAAASUVORK5CYII=',
     keepBuffer: 5,
     updateWhenIdle: true,
-    reuseTiles: true,     
-    unloadInvisibleTiles: true, 
-    detectRetina: true 
+    reuseTiles: true,
+    unloadInvisibleTiles: true,
+    detectRetina: true
 }).addTo(mymap);
 
 // Asignación de íconos según el tipo de árbol
 function getIconUrl(punto) {
     const sexo = punto.Sexo ? punto.Sexo.toLowerCase() : '';
+    const injertada = punto.injertada ? punto.injertada.toLowerCase() : '';
 
-    if (punto.injertada && punto.injertada.toLowerCase() === 'si') {
+    if (injertada === 'si' && sexo.includes('hembra')) {
         return 'Iconos/injerto.png';
+    } else if (injertada === 'si' && sexo.includes('macho')) {
+        return 'Iconos/Algarrobo_gris.png';
     } else if (sexo.includes('hembra')) {
         return 'Iconos/hembra.png';
     } else if (sexo.includes('macho')) {
         return 'Iconos/macho.png';
     } else if (sexo.includes('hermafrodita')) {
         return 'Iconos/hermafrodita.png';
-    } else {
-        return 'Iconos/Algarrobo_gris.png';
     }
 }
 
@@ -64,11 +65,11 @@ document.addEventListener('DOMContentLoaded', function() {
 cargarJSON('Datos/datos.json', function(puntos) {
     let totalArboles = 0;
     let tiposArboles = {
-        injertada: 0,
-        hermafrodita: 0,
         hembra: 0,
+        hembraInjertada: 0,
         macho: 0,
-        otros: 0
+        machoInjertado: 0,
+        hermafrodita: 0,
     };
 
     puntos.forEach(punto => {
@@ -90,16 +91,16 @@ cargarJSON('Datos/datos.json', function(puntos) {
 
         totalArboles++;
 
-        if (punto.injertada && punto.injertada.toLowerCase() === 'si') {
-            tiposArboles.injertada++; 
+        if (punto.Sexo && punto.Sexo.toLowerCase().includes('hembra') && punto.injertada && punto.injertada.toLowerCase() === 'si') {
+            tiposArboles.hembraInjertada++;
         } else if (punto.Sexo && punto.Sexo.toLowerCase().includes('hembra')) {
             tiposArboles.hembra++;
+        } else if (punto.Sexo && punto.Sexo.toLowerCase().includes('macho') && punto.injertada && punto.injertada.toLowerCase() === 'si') {
+            tiposArboles.machoInjertado++;
         } else if (punto.Sexo && punto.Sexo.toLowerCase().includes('macho')) {
             tiposArboles.macho++;
         }  else if (punto.Sexo && punto.Sexo.toLowerCase().includes('hermafrodita')) {
                 tiposArboles.hermafrodita++;
-        } else {
-            tiposArboles.otros++;
         }
 
         // Mostrar ficha al pulsar punto GPS
@@ -115,24 +116,17 @@ cargarJSON('Datos/datos.json', function(puntos) {
         <h4 style="margin-top: 0; margin-bottom: 10px;">Leyenda</h4>
         <button id="close-legend" style="position: absolute; top: 1px; right: 1px; border: none; background: none; font-size: 18px; cursor: pointer;">&times;</button>
         <div style="display: flex; align-items: center; margin-bottom: 10px; justify-content: flex-start;">
-            <img src="Iconos/injerto.png" alt="Injertada" style="width: 55px; height: 55px; margin-right: 10px;">
-            <div style="display: flex; flex-direction: column; align-items: flex-start;">
-                <span>Injertadas</span>
-                <span style="font-weight: bold;">${tiposArboles.injertada}</span>
-            </div>
-        </div>
-        <div style="display: flex; align-items: center; margin-bottom: 10px; justify-content: flex-start;">
-            <img src="Iconos/hermafrodita.png" alt="Hermafrodita" style="width: 55px; height: 55px; margin-right: 10px;">
-            <div style="display: flex; flex-direction: column; align-items: flex-start;">
-                <span>Hermafroditas</span>
-                <span style="font-weight: bold;">${tiposArboles.hermafrodita}</span>
-            </div>
-        </div>
-        <div style="display: flex; align-items: center; margin-bottom: 10px; justify-content: flex-start;">
             <img src="Iconos/hembra.png" alt="Hembra" style="width: 55px; height: 55px; margin-right: 10px;">
             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                 <span>Hembras</span>
                 <span style="font-weight: bold;">${tiposArboles.hembra}</span>
+            </div>
+        </div>
+        <div style="display: flex; align-items: center; margin-bottom: 10px; justify-content: flex-start;">
+            <img src="Iconos/injerto.png" alt="Hembra Injertada" style="width: 55px; height: 55px; margin-right: 10px;">
+            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                <span>Hembras Injertadas</span>
+                <span style="font-weight: bold;">${tiposArboles.hembraInjertada}</span>
             </div>
         </div>
         <div style="display: flex; align-items: center; margin-bottom: 10px; justify-content: flex-start;">
@@ -142,11 +136,18 @@ cargarJSON('Datos/datos.json', function(puntos) {
                 <span style="font-weight: bold;">${tiposArboles.macho}</span>
             </div>
         </div>
-        <div style="display: flex; align-items: center; justify-content: flex-start;">
-            <img src="Iconos/Algarrobo_gris.png" alt="Otros" style="width: 55px; height: 55px; margin-right: 10px;">
+        <div style="display: flex; align-items: center; margin-bottom: 10px; justify-content: flex-start;">
+            <img src="Iconos/Algarrobo_gris.png" alt="Macho Injertado" style="width: 55px; height: 55px; margin-right: 10px;">
             <div style="display: flex; flex-direction: column; align-items: flex-start;">
-                <span>Otros</span>
-                <span style="font-weight: bold;">${tiposArboles.otros}</span>
+                <span>Machos Injertados</span>
+                <span style="font-weight: bold;">${tiposArboles.machoInjertado}</span>
+            </div>
+        </div>
+        <div style="display: flex; align-items: center; margin-bottom: 10px; justify-content: flex-start;">
+            <img src="Iconos/hermafrodita.png" alt="Hermafrodita" style="width: 55px; height: 55px; margin-right: 10px;">
+            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                <span>Hermafroditas</span>
+                <span style="font-weight: bold;">${tiposArboles.hermafrodita}</span>
             </div>
         </div>
         <hr style="margin-top: 15px; margin-bottom: 10px;">
@@ -179,7 +180,7 @@ cargarJSON('Datos/datos.json', function(puntos) {
     legendDiv.style.border = '1px solid #ccc';
     legendDiv.style.borderRadius = '5px';
     legendDiv.style.padding = '20px';
-    legendDiv.style.zIndex = '1000'; 
+    legendDiv.style.zIndex = '1000';
     legendDiv.style.maxWidth = '95vw';
     legendDiv.style.maxHeight = '85vh';
     legendDiv.style.overflowY = 'auto';
