@@ -123,9 +123,9 @@ cargarJSON('Datos/datos.json', function(puntos) {
             </div>
         </div>
         <div style="display: flex; align-items: center; margin-bottom: 10px; justify-content: flex-start;">
-            <img src="Iconos/injerto.png" alt="Hembra Injertada" style="width: 55px; height: 55px; margin-right: 10px;">
+            <img src="Iconos/injerto.png" alt="H. injertada" style="width: 55px; height: 55px; margin-right: 10px;">
             <div style="display: flex; flex-direction: column; align-items: flex-start;">
-                <span>Hembras Injertadas</span>
+                <span>H. injertadas</span>
                 <span style="font-weight: bold;">${tiposArboles.hembraInjertada}</span>
             </div>
         </div>
@@ -137,9 +137,9 @@ cargarJSON('Datos/datos.json', function(puntos) {
             </div>
         </div>
         <div style="display: flex; align-items: center; margin-bottom: 10px; justify-content: flex-start;">
-            <img src="Iconos/Algarrobo_gris.png" alt="Macho Injertado" style="width: 55px; height: 55px; margin-right: 10px;">
+            <img src="Iconos/Algarrobo_gris.png" alt="M. injertado" style="width: 55px; height: 55px; margin-right: 10px;">
             <div style="display: flex; flex-direction: column; align-items: flex-start;">
-                <span>Machos Injertados</span>
+                <span>M. injertados</span>
                 <span style="font-weight: bold;">${tiposArboles.machoInjertado}</span>
             </div>
         </div>
