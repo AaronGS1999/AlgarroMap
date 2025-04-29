@@ -22,15 +22,15 @@ L.tileLayer('https://tile.opentopomap.org/{z}/{x}/{y}.png', {
     detectRetina: true
 }).addTo(mymap);
 
+// Grupo de clústeres
+const markersCluster = L.markerClusterGroup();
+
 // Asignación de íconos según el tipo de árbol
 function getIconUrl(punto) {
     const sexo = punto.Sexo ? punto.Sexo.toLowerCase() : '';
-    const injertada = punto.injertada ? punto.injertada.toLowerCase() : '';
 
-    if (injertada === 'si' && sexo.includes('hembra')) {
+    if (sexo === 'injertado') {
         return 'Iconos/injerto.png';
-    } else if (injertada === 'si' && sexo.includes('macho')) {
-        return 'Iconos/Algarrobo_gris.png';
     } else if (sexo.includes('hembra')) {
         return 'Iconos/hembra.png';
     } else if (sexo.includes('macho')) {
@@ -54,7 +54,7 @@ function getIconAnchor(size) {
 }
 
 // Ocultar la capa de la imagen ampliada al inicio
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const overlay = document.getElementById('img-overlay');
     if (overlay) {
         overlay.style.display = 'none';
@@ -62,13 +62,12 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // Cargar los datos y agregar marcadores
-cargarJSON('Datos/datos.json', function(puntos) {
+cargarJSON('Datos/datos.json', function (puntos) {
     let totalArboles = 0;
     let tiposArboles = {
         hembra: 0,
-        hembraInjertada: 0,
+        injertado: 0,
         macho: 0,
-        machoInjertado: 0,
         hermafrodita: 0,
     };
 
@@ -87,20 +86,18 @@ cargarJSON('Datos/datos.json', function(puntos) {
             popupAnchor: [0, -anchor[1]]
         });
 
-        const marker = L.marker([lat, lon], { icon: customIcon }).addTo(mymap);
+        const marker = L.marker([lat, lon], { icon: customIcon });
 
         totalArboles++;
 
-        if (punto.Sexo && punto.Sexo.toLowerCase().includes('hembra') && punto.injertada && punto.injertada.toLowerCase() === 'si') {
-            tiposArboles.hembraInjertada++;
+        if (punto.Sexo && punto.Sexo.toLowerCase() === 'injertado') {
+            tiposArboles.injertado++;
         } else if (punto.Sexo && punto.Sexo.toLowerCase().includes('hembra')) {
             tiposArboles.hembra++;
-        } else if (punto.Sexo && punto.Sexo.toLowerCase().includes('macho') && punto.injertada && punto.injertada.toLowerCase() === 'si') {
-            tiposArboles.machoInjertado++;
         } else if (punto.Sexo && punto.Sexo.toLowerCase().includes('macho')) {
             tiposArboles.macho++;
-        }  else if (punto.Sexo && punto.Sexo.toLowerCase().includes('hermafrodita')) {
-                tiposArboles.hermafrodita++;
+        } else if (punto.Sexo && punto.Sexo.toLowerCase().includes('hermafrodita')) {
+            tiposArboles.hermafrodita++;
         }
 
         // Mostrar ficha al pulsar punto GPS
@@ -109,69 +106,64 @@ cargarJSON('Datos/datos.json', function(puntos) {
         img.onload = function () {
             marker.on('click', () => ampliarImagen(img.src));
         };
+
+        markersCluster.addLayer(marker); // Agregar al clúster en lugar de al mapa directamente
     });
 
-    const legendContent = `
-    <div id="legend-popup-content" style="padding: 15px; background-color: white; border: 1px solid #ccc; border-radius: 5px; font-size: 12px; max-width: 450px; max-height: 650px; overflow-y: auto; text-align: center;">
-        <h4 style="margin-top: 0; margin-bottom: 10px;">Leyenda</h4>
-        <button id="close-legend" style="position: absolute; top: 1px; right: 1px; border: none; background: none; font-size: 18px; cursor: pointer;">&times;</button>
-        <div style="display: flex; align-items: center; margin-bottom: 10px; justify-content: flex-start;">
-            <img src="Iconos/hembra.png" alt="Hembra" style="width: 55px; height: 55px; margin-right: 10px;">
-            <div style="display: flex; flex-direction: column; align-items: flex-start;">
-                <span>Hembras</span>
-                <span style="font-weight: bold;">${tiposArboles.hembra}</span>
-            </div>
-        </div>
-        <div style="display: flex; align-items: center; margin-bottom: 10px; justify-content: flex-start;">
-            <img src="Iconos/injerto.png" alt="H. injertada" style="width: 55px; height: 55px; margin-right: 10px;">
-            <div style="display: flex; flex-direction: column; align-items: flex-start;">
-                <span>H. injertadas</span>
-                <span style="font-weight: bold;">${tiposArboles.hembraInjertada}</span>
-            </div>
-        </div>
-        <div style="display: flex; align-items: center; margin-bottom: 10px; justify-content: flex-start;">
-            <img src="Iconos/macho.png" alt="Macho" style="width: 55px; height: 55px; margin-right: 10px;">
-            <div style="display: flex; flex-direction: column; align-items: flex-start;">
-                <span>Machos</span>
-                <span style="font-weight: bold;">${tiposArboles.macho}</span>
-            </div>
-        </div>
-        <div style="display: flex; align-items: center; margin-bottom: 10px; justify-content: flex-start;">
-            <img src="Iconos/Algarrobo_gris.png" alt="M. injertado" style="width: 55px; height: 55px; margin-right: 10px;">
-            <div style="display: flex; flex-direction: column; align-items: flex-start;">
-                <span>M. injertados</span>
-                <span style="font-weight: bold;">${tiposArboles.machoInjertado}</span>
-            </div>
-        </div>
-        <div style="display: flex; align-items: center; margin-bottom: 10px; justify-content: flex-start;">
-            <img src="Iconos/hermafrodita.png" alt="Hermafrodita" style="width: 55px; height: 55px; margin-right: 10px;">
-            <div style="display: flex; flex-direction: column; align-items: flex-start;">
-                <span>Hermafroditas</span>
-                <span style="font-weight: bold;">${tiposArboles.hermafrodita}</span>
-            </div>
-        </div>
-        <hr style="margin-top: 15px; margin-bottom: 10px;">
-        <div style="display: flex; align-items: center; justify-content: flex-start;">
-            <img src="Iconos/Algarrobo_color.png" alt="Total" style="width: 55px; height: 55px; margin-right: 10px;">
-            <div style="display: flex; flex-direction: column; align-items: flex-start;">
-                <span>Total</span>
-                <span style="font-weight: bold;">${totalArboles}</span>
-            </div>
-        </div>
-        <hr style="margin-top: 15px; margin-bottom: 10px;">
-        <div style="text-align: center;">
-            <a href="https://github.com/AaronGS1999/AlgarroMap" target="_blank" style="text-decoration: none; color: blue; font-size: 14px;">Link al repositorio</a>
-        </div>
-    </div>
-`;
+    mymap.addLayer(markersCluster); // Añadir clúster al mapa
 
-    // div leyenda
+    const legendContent = `
+        <div id="legend-popup-content" style="padding: 15px; background-color: white; border: 1px solid #ccc; border-radius: 5px; font-size: 12px; max-width: 450px; max-height: 650px; overflow-y: auto; text-align: center;">
+            <h4 style="margin-top: 0; margin-bottom: 10px;">Leyenda</h4>
+            <button id="close-legend" style="position: absolute; top: 1px; right: 1px; border: none; background: none; font-size: 18px; cursor: pointer;">&times;</button>
+            <div style="display: flex; align-items: center; margin-bottom: 10px; justify-content: flex-start;">
+                <img src="Iconos/hembra.png" alt="Hembra" style="width: 55px; height: 55px; margin-right: 10px;">
+                <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                    <span>Hembras</span>
+                    <span style="font-weight: bold;">${tiposArboles.hembra}</span>
+                </div>
+            </div>
+            <div style="display: flex; align-items: center; margin-bottom: 10px; justify-content: flex-start;">
+                <img src="Iconos/injerto.png" alt="Injertado" style="width: 55px; height: 55px; margin-right: 10px;">
+                <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                    <span>Injertados</span>
+                    <span style="font-weight: bold;">${tiposArboles.injertado}</span>
+                </div>
+            </div>
+            <div style="display: flex; align-items: center; margin-bottom: 10px; justify-content: flex-start;">
+                <img src="Iconos/macho.png" alt="Macho" style="width: 55px; height: 55px; margin-right: 10px;">
+                <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                    <span>Machos</span>
+                    <span style="font-weight: bold;">${tiposArboles.macho}</span>
+                </div>
+            </div>
+            <div style="display: flex; align-items: center; margin-bottom: 10px; justify-content: flex-start;">
+                <img src="Iconos/hermafrodita.png" alt="Hermafrodita" style="width: 55px; height: 55px; margin-right: 10px;">
+                <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                    <span>Hermafroditas</span>
+                    <span style="font-weight: bold;">${tiposArboles.hermafrodita}</span>
+                </div>
+            </div>
+            <hr style="margin-top: 15px; margin-bottom: 10px;">
+            <div style="display: flex; align-items: center; justify-content: flex-start;">
+                <img src="Iconos/Algarrobo_color.png" alt="Total" style="width: 55px; height: 55px; margin-right: 10px;">
+                <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                    <span>Total</span>
+                    <span style="font-weight: bold;">${totalArboles}</span>
+                </div>
+            </div>
+            <hr style="margin-top: 15px; margin-bottom: 10px;">
+            <div style="text-align: center;">
+                <a href="https://github.com/AaronGS1999/AlgarroMap" target="_blank" style="text-decoration: none; color: blue; font-size: 14px;">Link al repositorio</a>
+            </div>
+        </div>
+    `;
+
     const legendDiv = document.createElement('div');
     legendDiv.id = 'legend-container';
     legendDiv.innerHTML = legendContent;
     document.body.appendChild(legendDiv);
 
-    // Aplicar estilos CSS para centrarlo en la pantalla
     legendDiv.style.position = 'fixed';
     legendDiv.style.top = '50%';
     legendDiv.style.left = '50%';
@@ -186,9 +178,8 @@ cargarJSON('Datos/datos.json', function(puntos) {
     legendDiv.style.overflowY = 'auto';
     legendDiv.style.textAlign = 'center';
 
-    // Cerrar leyenda
     const closeButton = document.getElementById('close-legend');
-    closeButton.addEventListener('click', function() {
+    closeButton.addEventListener('click', function () {
         const legendContainer = document.getElementById('legend-container');
         if (legendContainer) {
             legendContainer.style.display = 'none';
