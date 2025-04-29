@@ -8,12 +8,10 @@ function cargarJSON(url, callback) {
 
 const mymap = L.map('mapid').setView([36.93, -1.99], 13);
 
-// Teselas del mapa
-L.tileLayer('https://tile.opentopomap.org/{z}/{x}/{y}.png', {
-    maxZoom: 17,
-    attribution: 'Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ' +
-        '<a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; ' +
-        '<a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)',
+// Teselas del mapa (OpenStreetMap estándar, rápido y sin token)
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
     errorTileUrl: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAAAQCAYAAAB49x6fAAAAHklEQVR42mNgGAWjgP///zDw//8/AyUY0QYAjKkMBV8Y+Z4AAAAASUVORK5CYII=',
     keepBuffer: 5,
     updateWhenIdle: true,
