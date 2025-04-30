@@ -34,16 +34,16 @@
   {
       "Accesión": "Belen 1",
       "id": "6",
-      "latitud": "36931114",
-      "longitud": "-1990828",
+      "latitud": "36856321",
+      "longitud": "-2481307",
       "Sexo": "Hembra",
       "imagen": "Belen1.png"
   },
   {
       "Accesión": "Belen 2",
       "id": "7",
-      "latitud": "36930463",
-      "longitud": "-1991669",
+      "latitud": "36856308",
+      "longitud": "-2481249",
       "Sexo": "Macho",
       "imagen": "Belen2.png"
   },
@@ -106,8 +106,8 @@
   {
       "Accesión": "El de Cristobal",
       "id": "8",
-      "latitud": "36930819",
-      "longitud": "-1989421",
+      "latitud": "37012126",
+      "longitud": "-2754758",
       "Sexo": "injertado",
       "imagen": "ElDeCristobal.png"
   },
@@ -298,8 +298,8 @@
   {
       "Accesión": "Marchalico 1",
       "id": "10",
-      "latitud": "37016746",
-      "longitud": "-2749151",
+      "latitud": "37106451",
+      "longitud": "-2042939",
       "Sexo": "injertado",
       "imagen": "Marchalico1.png"
   },
@@ -410,8 +410,8 @@
   {
       "Accesión": "Plomo 2",
       "id": "2",
-      "latitud": "36930463",
-      "longitud": "-1991669",
+      "latitud": "36931114",
+      "longitud": "-1990828",
       "Sexo": "Macho",
       "imagen": "Plomo2.png"
   },
@@ -483,7 +483,7 @@
       "Accesión": "Vicar 1",
       "id": "26",
       "latitud": "36819944",
-      "longitud": "-2203833",
+      "longitud": "-2652833",
       "Sexo": "injertado",
       "imagen": "Vicar1.png"
   },
