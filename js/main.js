@@ -8,7 +8,7 @@ function cargarJSON(url, callback) {
 
 const mymap = L.map('mapid').setView([36.93, -1.99], 13);
 
-// Ajustes carga de tiles
+// Teselas del mapa 
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
@@ -20,6 +20,7 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     detectRetina: true
 }).addTo(mymap);
 
+// Grupo de clústeres
 const markersCluster = L.markerClusterGroup();
 
 // Asignación de íconos según el tipo de árbol
@@ -50,7 +51,7 @@ function getIconAnchor(size) {
     return [size[0] / 2, size[1]];
 }
 
-
+// Ocultar la capa de la imagen ampliada al inicio
 document.addEventListener('DOMContentLoaded', function () {
     const overlay = document.getElementById('img-overlay');
     if (overlay) {
@@ -96,17 +97,18 @@ cargarJSON('Datos/datos.json', function (puntos) {
         } else if (punto.Sexo && punto.Sexo.toLowerCase().includes('hermafrodita')) {
             tiposArboles.hermafrodita++;
         }
-S
+
+        // Mostrar ficha al pulsar punto GPS
         const img = new Image();
         img.src = `Fichas/${punto.imagen}`;
         img.onload = function () {
             marker.on('click', () => ampliarImagen(img.src));
         };
 
-        markersCluster.addLayer(marker);
+        markersCluster.addLayer(marker); // Agregar al clúster en lugar de al mapa directamente
     });
 
-    mymap.addLayer(markersCluster);
+    mymap.addLayer(markersCluster); // Añadir clúster al mapa
 
     const legendContent = `
         <div id="legend-popup-content" style="padding: 15px; background-color: white; border: 1px solid #ccc; border-radius: 5px; font-size: 12px; max-width: 450px; max-height: 650px; overflow-y: auto; text-align: center;">
