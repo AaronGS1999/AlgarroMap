@@ -193,16 +193,16 @@ cargarJSON('Datos/datos.json', function (puntos) {
                     const avgTemperature = dailyTemperatures.reduce((sum, temp) => sum + temp, 0) / dailyTemperatures.length;
                     const totalPrecipitation = dailyPrecipitation.reduce((sum, prec) => sum + prec, 0);
 
-                    weatherInfo = `<div style="text-align: center; margin-bottom: 10px;">
-                                       <b>Datos climatológicos (${new Date().getFullYear() - 1}):</b><br>
-                                       Tª media anual: ${avgTemperature.toFixed(2)} &#8451;<br>
-                                       Precipitación total anual: ${totalPrecipitation.toFixed(2)} mm
-                                   </div>`;
+                    weatherInfo = `<div style="text-align: center; margin-bottom: 10px; background-color: white; padding: 5px; border-radius: 3px;">
+                                        <b>Datos climatológicos (${new Date().getFullYear() - 1}):</b><br>
+                                        Tª media anual: ${avgTemperature.toFixed(2)} &#8451;<br>
+                                        Precipitación total anual: ${totalPrecipitation.toFixed(2)} mm
+                                    </div>`;
                 } else {
-                    weatherInfo = '<div style="text-align: center; margin-bottom: 10px;">No se encontraron datos climatológicos anuales.</div>';
+                    weatherInfo = '<div style="text-align: center; margin-bottom: 10px; background-color: white; padding: 5px; border-radius: 3px;">No se encontraron datos climatológicos anuales.</div>';
                 }
             } else {
-                weatherInfo = '<div style="text-align: center; margin-bottom: 10px;">Error al obtener datos climatológicos anuales.</div>';
+                weatherInfo = '<div style="text-align: center; margin-bottom: 10px; background-color: white; padding: 5px; border-radius: 3px;">Error al obtener datos climatológicos anuales.</div>';
             }
 
             marker.on('click', () => ampliarImagen(img.src, weatherInfo));
@@ -266,15 +266,15 @@ function ampliarImagen(src, weatherInfo) {
     const overlayImg = document.getElementById('img-overlay-content');
     overlayImg.src = src;
     overlayImg.style.maxWidth = '90vw';
-    overlayImg.style.maxHeight = 'calc(100vh - 60px)'; 
+    overlayImg.style.maxHeight = 'calc(100vh - 60px)';
 
-    // Insertar la información del clima
+    // Insertar la información del clima con fondo blanco
     overlay.innerHTML = `<div style="display: flex; flex-direction: column; align-items: center; width: 100%; margin-bottom: 5px;">
-                                <div style="text-align: center; font-size: smaller;">${weatherInfo.replace(/<br>/g, ' | ')}</div>
-                                <img id="img-overlay-content" src="${src}" style="max-width: 90vw; max-height: calc(100vh - 60px); margin-top: 0;">
-                            </div>`;
+                                        <div style="text-align: center; font-size: smaller; background-color: white; padding: 5px; border-radius: 3px;">${weatherInfo.replace(/<br>/g, ' | ')}</div>
+                                        <img id="img-overlay-content" src="${src}" style="max-width: 90vw; max-height: calc(100vh - 60px); margin-top: 0;">
+                                    </div>`;
     overlay.style.display = 'flex';
-    overlay.style.alignItems = 'flex-start'; 
+    overlay.style.alignItems = 'flex-start';
     overlay.style.paddingTop = '10px';
 
     mymap.closePopup();
