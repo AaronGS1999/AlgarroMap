@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', function () {
         overlay.style.display = 'none';
     }
 
-    // Crear el contenedor para el icono de leyenda y el contador de hits
+    // Contenedor para el icono de leyenda y el contador de visitas
     const legendContainerDiv = document.createElement('div');
     legendContainerDiv.style.position = 'fixed';
     legendContainerDiv.style.top = '20px';
@@ -63,16 +63,19 @@ document.addEventListener('DOMContentLoaded', function () {
     legendContainerDiv.style.alignItems = 'center';
     legendContainerDiv.style.zIndex = '1001';
 
-    // Crear el contador de visitas (enlace e imagen)
+    // Contador de visitas
     const hitsMarker = document.createElement('a');
-    hitsMarker.href = "https://hits.sh/aarongs1999.github.io/AlgarroMap/";
     const hitsImage = document.createElement('img');
     hitsImage.alt = "Visitas";
-    hitsImage.src = "https://hits.sh/aarongs1999.github.io/AlgarroMap.svg?label=Visitas"; // Modificamos la URL
-    hitsImage.style.marginRight = '10px'; // Espacio entre el contador y el icono
+    hitsImage.src = "https://hits.sh/aarongs1999.github.io/AlgarroMap.svg?label=Visitas";
+    hitsImage.style.marginRight = '10px';
     hitsMarker.appendChild(hitsImage);
-
-    // Crear el botón de leyenda (icono)
+    hitsMarker.style.cursor = 'pointer';
+    hitsMarker.addEventListener('click', function(event) {
+    event.preventDefault();
+    window.open("https://hits.sh/aarongs1999.github.io/AlgarroMap/", '_blank');
+    });
+    // Botón de leyenda
     const legendButton = document.createElement('img');
     legendButton.src = 'Iconos/Algarrobo_color.png';
     legendButton.alt = 'Mostrar Leyenda';
