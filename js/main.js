@@ -1,4 +1,3 @@
-// Función para cargar los datos .json
 function cargarJSON(url, callback) {
     fetch(url)
         .then(response => response.json())
@@ -123,6 +122,23 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
+// Función para obtener datos climáticos históricos anuales de Open-Meteo API
+async function getHistoricalWeatherData(lat, lon) {
+    const currentDate = new Date();
+    const currentYear = currentDate.getFullYear();
+    const startDate = `${currentYear - 1}-01-01`;
+    const endDate = `${currentYear - 1}-12-31`;
+    const url = `https://archive-api.open-meteo.com/v1/archive?latitude=${lat}&longitude=${lon}&start_date=${startDate}&end_date=${endDate}&daily=temperature_2m_mean,precipitation_sum&timezone=Europe%2FBerlin`;
+    try {
+        const response = await fetch(url);
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Error fetching historical weather data:', error);
+        return null;
+    }
+}
+
 // Cargar los datos y agregar marcadores
 cargarJSON('Datos/datos.json', function (puntos) {
     let totalArboles = 0;
@@ -165,8 +181,31 @@ cargarJSON('Datos/datos.json', function (puntos) {
         // Mostrar ficha al pulsar punto GPS
         const img = new Image();
         img.src = `Fichas/${punto.imagen}`;
-        img.onload = function () {
-            marker.on('click', () => ampliarImagen(img.src));
+
+        img.onload = async function () {
+            const historicalWeatherData = await getHistoricalWeatherData(lat, lon);
+            let weatherInfo = '';
+            if (historicalWeatherData && historicalWeatherData.daily && historicalWeatherData.daily.time) {
+                const dailyTemperatures = historicalWeatherData.daily.temperature_2m_mean;
+                const dailyPrecipitation = historicalWeatherData.daily.precipitation_sum;
+
+                if (dailyTemperatures && dailyPrecipitation && dailyTemperatures.length > 0) {
+                    const avgTemperature = dailyTemperatures.reduce((sum, temp) => sum + temp, 0) / dailyTemperatures.length;
+                    const totalPrecipitation = dailyPrecipitation.reduce((sum, prec) => sum + prec, 0);
+
+                    weatherInfo = `<div style="text-align: center; margin-bottom: 10px;">
+                                       <b>Datos climatológicos (${new Date().getFullYear() - 1}):</b><br>
+                                       Tª media anual: ${avgTemperature.toFixed(2)} &#8451;<br>
+                                       Precipitación total anual: ${totalPrecipitation.toFixed(2)} mm
+                                   </div>`;
+                } else {
+                    weatherInfo = '<div style="text-align: center; margin-bottom: 10px;">No se encontraron datos climatológicos anuales.</div>';
+                }
+            } else {
+                weatherInfo = '<div style="text-align: center; margin-bottom: 10px;">Error al obtener datos climatológicos anuales.</div>';
+            }
+
+            marker.on('click', () => ampliarImagen(img.src, weatherInfo));
         };
 
         markersCluster.addLayer(marker);
@@ -222,12 +261,21 @@ cargarJSON('Datos/datos.json', function (puntos) {
     `;
 });
 
-// Cierre popups
-function ampliarImagen(src) {
+function ampliarImagen(src, weatherInfo) {
     const overlay = document.getElementById('img-overlay');
     const overlayImg = document.getElementById('img-overlay-content');
     overlayImg.src = src;
+    overlayImg.style.maxWidth = '90vw';
+    overlayImg.style.maxHeight = 'calc(100vh - 60px)'; 
+
+    // Insertar la información del clima
+    overlay.innerHTML = `<div style="display: flex; flex-direction: column; align-items: center; width: 100%; margin-bottom: 5px;">
+                                <div style="text-align: center; font-size: smaller;">${weatherInfo.replace(/<br>/g, ' | ')}</div>
+                                <img id="img-overlay-content" src="${src}" style="max-width: 90vw; max-height: calc(100vh - 60px); margin-top: 0;">
+                            </div>`;
     overlay.style.display = 'flex';
+    overlay.style.alignItems = 'flex-start'; 
+    overlay.style.paddingTop = '10px';
 
     mymap.closePopup();
 }

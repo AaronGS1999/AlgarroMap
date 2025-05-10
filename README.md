@@ -38,3 +38,7 @@ Este repositorio contiene los siguientes elementos clave:
 * **`datos/datos.json`**: Archivo principal en formato JSON que almacena la información básica de los diferentes árboles de algarrobo muestreados y que está vinculado al contenido de las fichas en el directorio `imágenes`.
 * **`imágenes`**: Directorio que contiene las fichas con información detallada de cada individuo muestreado.
 * **`js/main.js`**: JavaScript que muestra puntos geográficos en el mapa utilizando la librería Leaflet. Los datos de los puntos se cargan desde el archivo JSON (`datos/datos.json`).
+
+**`Mapa`**: Los datos del mapa se obtienen a través de https://www.openstreetmap.org/.
+
+**`Datos climatológicos`**: Se obtienen de la web https://open-meteo.com/ y se representan los datos de temperatura y precipitaciones del año anterior al del acceso a la web.
