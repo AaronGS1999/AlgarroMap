@@ -8,7 +8,7 @@ function cargarJSON(url, callback) {
 
 const mymap = L.map('mapid').setView([36.93, -1.99], 13);
 
-// Tiles del mapa 
+// Tiles del mapa
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
@@ -40,11 +40,7 @@ function getIconUrl(punto) {
 
 // Tamaño de los iconos
 function getIconSize() {
-    if (window.innerWidth < 768) {
-        return [80, 80];
-    } else {
-        return [80, 80];
-    }
+    return [80, 80];
 }
 
 function getIconAnchor(size) {
@@ -57,6 +53,71 @@ document.addEventListener('DOMContentLoaded', function () {
     if (overlay) {
         overlay.style.display = 'none';
     }
+
+    // Crear el contenedor para el icono de leyenda y el contador de hits
+    const legendContainerDiv = document.createElement('div');
+    legendContainerDiv.style.position = 'fixed';
+    legendContainerDiv.style.top = '20px';
+    legendContainerDiv.style.right = '20px';
+    legendContainerDiv.style.display = 'flex';
+    legendContainerDiv.style.alignItems = 'center';
+    legendContainerDiv.style.zIndex = '1001';
+
+    // Crear el contador de visitas (enlace e imagen)
+    const hitsMarker = document.createElement('a');
+    hitsMarker.href = "https://hits.sh/aarongs1999.github.io/AlgarroMap/";
+    const hitsImage = document.createElement('img');
+    hitsImage.alt = "Visitas";
+    hitsImage.src = "https://hits.sh/aarongs1999.github.io/AlgarroMap.svg?label=Visitas"; // Modificamos la URL
+    hitsImage.style.marginRight = '10px'; // Espacio entre el contador y el icono
+    hitsMarker.appendChild(hitsImage);
+
+    // Crear el botón de leyenda (icono)
+    const legendButton = document.createElement('img');
+    legendButton.src = 'Iconos/Algarrobo_color.png';
+    legendButton.alt = 'Mostrar Leyenda';
+    legendButton.style.width = '50px';
+    legendButton.style.height = '50px';
+    legendButton.style.cursor = 'pointer';
+
+    legendContainerDiv.appendChild(hitsMarker);
+    legendContainerDiv.appendChild(legendButton);
+    document.body.appendChild(legendContainerDiv);
+
+    let legendContainer = null;
+
+    legendButton.addEventListener('click', function () {
+        if (legendContainer) {
+            legendContainer.style.display = 'block';
+            return;
+        }
+
+        legendContainer = document.createElement('div');
+        legendContainer.id = 'legend-container';
+        legendContainer.style.position = 'fixed';
+        legendContainer.style.top = '50%';
+        legendContainer.style.left = '50%';
+        legendContainer.style.transform = 'translate(-50%, -50%)';
+        legendContainer.style.backgroundColor = 'white';
+        legendContainer.style.border = '1px solid #ccc';
+        legendContainer.style.borderRadius = '5px';
+        legendContainer.style.padding = '20px';
+        legendContainer.style.zIndex = '1000';
+        legendContainer.style.maxWidth = '95vw';
+        legendContainer.style.maxHeight = '85vh';
+        legendContainer.style.overflowY = 'auto';
+        legendContainer.style.textAlign = 'center';
+
+        legendContainer.innerHTML = legendContent;
+        document.body.appendChild(legendContainer);
+
+        const closeButton = document.getElementById('close-legend');
+        closeButton.addEventListener('click', function () {
+            if (legendContainer) {
+                legendContainer.style.display = 'none';
+            }
+        });
+    });
 });
 
 // Cargar los datos y agregar marcadores
@@ -105,12 +166,12 @@ cargarJSON('Datos/datos.json', function (puntos) {
             marker.on('click', () => ampliarImagen(img.src));
         };
 
-        markersCluster.addLayer(marker); // Agregar al clúster en lugar de al mapa directamente
+        markersCluster.addLayer(marker);
     });
 
-    mymap.addLayer(markersCluster); // Añadir clúster al mapa
+    mymap.addLayer(markersCluster);
 
-    const legendContent = `
+    window.legendContent = `
         <div id="legend-popup-content" style="padding: 15px; background-color: white; border: 1px solid #ccc; border-radius: 5px; font-size: 12px; max-width: 450px; max-height: 650px; overflow-y: auto; text-align: center;">
             <h4 style="margin-top: 0; margin-bottom: 10px;">Leyenda</h4>
             <button id="close-legend" style="position: absolute; top: 1px; right: 1px; border: none; background: none; font-size: 18px; cursor: pointer;">&times;</button>
@@ -156,33 +217,6 @@ cargarJSON('Datos/datos.json', function (puntos) {
             </div>
         </div>
     `;
-
-    const legendDiv = document.createElement('div');
-    legendDiv.id = 'legend-container';
-    legendDiv.innerHTML = legendContent;
-    document.body.appendChild(legendDiv);
-
-    legendDiv.style.position = 'fixed';
-    legendDiv.style.top = '50%';
-    legendDiv.style.left = '50%';
-    legendDiv.style.transform = 'translate(-50%, -50%)';
-    legendDiv.style.backgroundColor = 'white';
-    legendDiv.style.border = '1px solid #ccc';
-    legendDiv.style.borderRadius = '5px';
-    legendDiv.style.padding = '20px';
-    legendDiv.style.zIndex = '1000';
-    legendDiv.style.maxWidth = '95vw';
-    legendDiv.style.maxHeight = '85vh';
-    legendDiv.style.overflowY = 'auto';
-    legendDiv.style.textAlign = 'center';
-
-    const closeButton = document.getElementById('close-legend');
-    closeButton.addEventListener('click', function () {
-        const legendContainer = document.getElementById('legend-container');
-        if (legendContainer) {
-            legendContainer.style.display = 'none';
-        }
-    });
 });
 
 // Cierre popups
