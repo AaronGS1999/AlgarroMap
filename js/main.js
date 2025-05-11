@@ -263,25 +263,16 @@ cargarJSON('Datos/datos.json', function (puntos) {
 
 function ampliarImagen(src, weatherInfo) {
     const overlay = document.getElementById('img-overlay');
-    const overlayContent = document.createElement('div');
-    overlayContent.style.display = 'flex';
-    overlayContent.style.flexDirection = 'column';
-    overlayContent.style.alignItems = 'center';
-    overlayContent.style.width = '100%';
+    const overlayImg = document.getElementById('img-overlay-content');
+    overlayImg.src = src;
+    overlayImg.style.maxWidth = '90vw';
+    overlayImg.style.maxHeight = 'calc(100vh - 60px)';
 
-    const weatherDiv = document.createElement('div');
-    weatherDiv.innerHTML = `<div style="text-align: center; font-size: smaller; background-color: white; padding: 5px; border-radius: 3px; margin-bottom: 5px;">${weatherInfo.replace(/<br>/g, ' | ')}</div>`;
-    overlayContent.appendChild(weatherDiv);
-
-    const img = document.createElement('img');
-    img.id = 'img-overlay-content';
-    img.src = src;
-    img.style.maxWidth = '90vw';
-    img.style.maxHeight = 'calc(100vh - 60px)';
-    overlayContent.appendChild(img);
-
-    overlay.innerHTML = ''; // Limpiamos el contenido anterior del overlay
-    overlay.appendChild(overlayContent);
+    // Insertar la información del clima con fondo blanco
+    overlay.innerHTML = `<div style="display: flex; flex-direction: column; align-items: center; width: 100%; margin-bottom: 5px;">
+                                        <div style="text-align: center; font-size: smaller; background-color: white; padding: 5px; border-radius: 3px;">${weatherInfo.replace(/<br>/g, ' | ')}</div>
+                                        <img id="img-overlay-content" src="${src}" style="max-width: 90vw; max-height: calc(100vh - 60px); margin-top: 0;">
+                                    </div>`;
     overlay.style.display = 'flex';
     overlay.style.alignItems = 'flex-start';
     overlay.style.paddingTop = '10px';
