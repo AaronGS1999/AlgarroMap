@@ -526,5 +526,21 @@
       "longitud": "-7804543",
       "Sexo": "Hembra",
       "imagen": ""
+  },
+    {
+      "Accesión": "Ourika",
+      "id": "67",
+      "latitud": "31427465",
+      "longitud": "-7799391",
+      "Sexo": "Hembra",
+      "imagen": ""
+  },
+    {
+      "Accesión": "COUMMUNE Moukriseet",
+      "id": "68",
+      "latitud": "31427465",
+      "longitud": "-7799391",
+      "Sexo": "Hembra",
+      "imagen": ""
   }
 ]
