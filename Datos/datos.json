@@ -536,10 +536,194 @@
       "imagen": ""
   },
     {
-      "Accesión": "COUMMUNE Moukriseet",
+      "Accesión": "Aïn Asserdoun",
       "id": "68",
-      "latitud": "31427465",
-      "longitud": "-7799391",
+      "latitud": "32319132",
+      "longitud": "-6324286",
+      "Sexo": "Hembra",
+      "imagen": ""
+  },
+    {
+      "Accesión": "Tanougha",
+      "id": "69",
+      "latitud": "32479644",
+      "longitud": "-6140730",
+      "Sexo": "Macho",
+      "imagen": ""
+  },
+    {
+      "Accesión": "station 2",
+      "id": "70",
+      "latitud": "33692014",
+      "longitud": "-5385397",
+      "Sexo": "Hembra",
+      "imagen": ""
+  },
+    {
+      "Accesión": "station 1",
+      "id": "71",
+      "latitud": "33690541",
+      "longitud": "-5379649",
+      "Sexo": "Hembra",
+      "imagen": ""
+  },
+    {
+      "Accesión": "Tioughza",
+      "id": "72",
+      "latitud": "29650982",
+      "longitud": "-9950939",
+      "Sexo": "Hembra",
+      "imagen": ""
+  },
+    {
+      "Accesión": "AIT-TAGLA",
+      "id": "73",
+      "latitud": "31964925",
+      "longitud": "-6764761",
+      "Sexo": "Hembra",
+      "imagen": ""
+  },
+    {
+      "Accesión": "IKEDRAN",
+      "id": "74",
+      "latitud": "31801401",
+      "longitud": "-6696354",
+      "Sexo": "Hembra",
+      "imagen": ""
+  },
+    {
+      "Accesión": "ouled mrabet",
+      "id": "75",
+      "latitud": "31604907",
+      "longitud": "-9194715",
+      "Sexo": "Hembra",
+      "imagen": ""
+  },
+    {
+      "Accesión": "mouarid",
+      "id": "76",
+      "latitud": "31382072",
+      "longitud": "-9185407",
+      "Sexo": "Macho",
+      "imagen": ""
+  },
+    {
+      "Accesión": "EL-kodia",
+      "id": "77",
+      "latitud": "31607429",
+      "longitud": "-9193394",
+      "Sexo": "Macho",
+      "imagen": ""
+  },
+    {
+      "Accesión": "Oued Laou",
+      "id": "78",
+      "latitud": "35369825",
+      "longitud": "-5176705",
+      "Sexo": "Hembra",
+      "imagen": ""
+  },
+    {
+      "Accesión": "Chefchaouen 1",
+      "id": "79",
+      "latitud": "34900180",
+      "longitud": "-5168089",
+      "Sexo": "Hembra",
+      "imagen": ""
+  },
+    {
+      "Accesión": "Chefchaouen 2",
+      "id": "80",
+      "latitud": "34909450",
+      "longitud": "-5199037",
+      "Sexo": "Hembra",
+      "imagen": ""
+  },
+    {
+      "Accesión": "Kaf nsour",
+      "id": "81",
+      "latitud": "32912027",
+      "longitud": "-5958421",
+      "Sexo": "Hembra",
+      "imagen": ""
+  },
+    {
+      "Accesión": "Sidi-Bouabbad",
+      "id": "81",
+      "latitud": "32919474",
+      "longitud": "-6086045",
+      "Sexo": "Hembra",
+      "imagen": ""
+  },
+    {
+      "Accesión": "MADAGH",
+      "id": "82",
+      "latitud": "35021783",
+      "longitud": "-2352036",
+      "Sexo": "Hembra",
+      "imagen": ""
+  },
+    {
+      "Accesión": "TAFOUGHALT",
+      "id": "83",
+      "latitud": "34806262",
+      "longitud": "-2366837",
+      "Sexo": "Macho",
+      "imagen": ""
+  },
+    {
+      "Accesión": "Bouarg nador",
+      "id": "84",
+      "latitud": "35081213",
+      "longitud": "-2910754",
+      "Sexo": "Hembra",
+      "imagen": ""
+  },
+    {
+      "Accesión": "Tafarsit driouch",
+      "id": "85",
+      "latitud": "35003591",
+      "longitud": "-3538405",
+      "Sexo": "Hembra",
+      "imagen": ""
+  },
+    {
+      "Accesión": "SIDI-Abdellah ghiat",
+      "id": "86",
+      "latitud": "31474290",
+      "longitud": "-7801852",
+      "Sexo": "Macho",
+      "imagen": ""
+  },
+    {
+      "Accesión": "Ait Ouarda",
+      "id": "87",
+      "latitud": "321313004",
+      "longitud": "-65281593",
+      "Sexo": "Hembra",
+      "imagen": ""
+  },
+    {
+      "Accesión": "ouaoumana",
+      "id": "88",
+      "latitud": "327088522",
+      "longitud": "-58111615",
+      "Sexo": "Hembra",
+      "imagen": ""
+  },
+    {
+      "Accesión": "SITI FATMA",
+      "id": "89",
+      "latitud": "313095297",
+      "longitud": "-77417634",
+      "Sexo": "Hembra",
+      "imagen": ""
+  },
+    {
+      "Accesión": "Akchour",
+      "id": "90",
+      "latitud": "352453122",
+      "longitud": "-51905202",
       "Sexo": "Hembra",
       "imagen": ""
   }
