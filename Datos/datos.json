@@ -498,8 +498,24 @@
     {
       "Accesión": "Albanchez 1",
       "id": "63",
-      "latitud": "37277",
-      "longitud": "-2197",
+      "latitud": "37277000",
+      "longitud": "-2197000",
+      "Sexo": "Hembra",
+      "imagen": ""
+  },
+    {
+      "Accesión": "Albanchez 2",
+      "id": "64",
+      "latitud": "37386000",
+      "longitud": "--2181000",
+      "Sexo": "Hermafrodita",
+      "imagen": ""
+  },
+    {
+      "Accesión": "Albanchez 3",
+      "id": "63",
+      "latitud": "37285000",
+      "longitud": "-2181000",
       "Sexo": "Hembra",
       "imagen": ""
   }
