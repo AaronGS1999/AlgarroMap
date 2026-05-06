@@ -42,3 +42,7 @@ Este repositorio contiene los siguientes elementos clave:
 **`Mapa`**: Los datos del mapa se obtienen a través de https://www.openstreetmap.org/.
 
 **`Datos climatológicos`**: Se obtienen de la web https://open-meteo.com/ y se representan los datos de temperatura y precipitaciones del año anterior al del acceso a la web.
+
+## Agradecimientos
+
+Este trabajo fue financiado por la ayuda PID2023-146207OB-I00 del Ministerio de Ciencia, Innovación y Universidades (MCIU), la Agencia Estatal de Investigación (AEI) / 10.13039/501100011033 y el Fondo Social Europeo Plus (FSE+), a través del proyecto "El modelo agrícola de Almería ante el cambio global. Propuestas desde la genómica de la agrobiodiversidad" (OrphanEvolGen).
