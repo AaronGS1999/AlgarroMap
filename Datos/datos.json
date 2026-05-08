@@ -10,8 +10,8 @@
   {
       "Accesión": "Bedar 1",
       "id": "41",
-      "latitud": "36953889",
-      "longitud": "-2196806",
+      "latitud": "37175205",
+      "longitud": "-1958042",
       "Sexo": "Macho",
       "imagen": "Bedar1.png"
   },
@@ -724,6 +724,86 @@
       "id": "91",
       "latitud": "35245312",
       "longitud": "-5190520",
+      "Sexo": "Hembra",
+      "imagen": ""
+  },
+    {
+      "Accesión": "COUMMUNE Moukriseet",
+      "id": "92",
+      "latitud": "35050000",
+      "longitud": "-5535678",
+      "Sexo": "Hembra",
+      "imagen": ""
+  },
+    {
+      "Accesión": "COMMUNE ZOUMI",
+      "id": "93",
+      "latitud": "35154915",
+      "longitud": "-5674729",
+      "Sexo": "Hembra",
+      "imagen": ""
+  },
+    {
+      "Accesión": "Taroudant 3",
+      "id": "94",
+      "latitud": "30496179",
+      "longitud": "-8869242",
+      "Sexo": "Injertado",
+      "imagen": ""
+  },
+    {
+      "Accesión": "Taroudant 2",
+      "id": "95",
+      "latitud": "30419559",
+      "longitud": "-8940639",
+      "Sexo": "Injertado",
+      "imagen": ""
+  },
+    {
+      "Accesión": "AIT OURRIR-arbre1",
+      "id": "96",
+      "latitud": "31551550",
+      "longitud": "-7586876",
+      "Sexo": "Hembra",
+      "imagen": ""
+  },
+    {
+      "Accesión": "AIT OURRIR-arbre2",
+      "id": "97",
+      "latitud": "31551550",
+      "longitud": "-7586876",
+      "Sexo": "Hembra",
+      "imagen": ""
+  },
+    {
+      "Accesión": "NADOR-arbre1",
+      "id": "98",
+      "latitud": "35239457",
+      "longitud": "-2947118",
+      "Sexo": "Hembra",
+      "imagen": ""
+  },
+    {
+      "Accesión": "NADOR-arbre2",
+      "id": "99",
+      "latitud": "35240602",
+      "longitud": "-2941663",
+      "Sexo": "Hembra",
+      "imagen": ""
+  },
+    {
+      "Accesión": "Dalías",
+      "id": "100",
+      "latitud": "36824001",
+      "longitud": "-2867896",
+      "Sexo": "Hembra",
+      "imagen": ""
+  },
+    {
+      "Accesión": "Sierra Alhamilla",
+      "id": "101",
+      "latitud": "36959536",
+      "longitud": "-2304160",
       "Sexo": "Hembra",
       "imagen": ""
   }
